@@ -3,7 +3,7 @@
 #include "Player.h"
 #include <chrono>
 #include "Time.h"
-
+#include<iostream>
 static GameWorld* instance = nullptr;
 
 void size_resize_callback(GLFWwindow* window, int width, int height)
@@ -30,7 +30,7 @@ GameWorld::GameWorld()
 
 	gameObjects.push_back(go);
 
-	Player* d = new Player(0,0,0,5);
+	Player* d = new Player(0, -1, 0, 5);
 
 	gameObjects.push_back(d);
 
@@ -49,34 +49,32 @@ GameWorld::~GameWorld()
 {
 
 	REMOVE_PTR(instance);
-	
+
 
 	for (GameObject* go : gameObjects)
 	{
-		REMOVE_PTR(go);		
+		REMOVE_PTR(go);
 
 	}
 }
 
 void GameWorld::GameLoop()
 {
+	DEBUG_LOG("Entering Game Loop");
+
 	while (!glfwWindowShouldClose(window)) // Køre så længe glfw vinduet ikke har fået besked på at lukke (f.eks. tryk på X knappen)
 	{
-		Time::Start();
+		Time::Start(); //Start timer, to measure update timespan
 
-		GameLogic();
-		Render();
+		GameLogic(); //update game 
+		Render(); //draw game
+
 		glfwPollEvents();
 
-
-		auto finish = std::chrono::high_resolution_clock::now();
-
-
-
-		Time::Stop();
-
-
+		Time::Stop(); // stops timer, saves elapsed time (deltatime)
 	}
+	DEBUG_LOG("Exiting Game Loop");
+
 }
 
 void GameWorld::GameLogic()

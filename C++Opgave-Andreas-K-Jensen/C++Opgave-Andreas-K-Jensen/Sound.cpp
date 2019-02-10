@@ -12,12 +12,7 @@ void Sound::Play()
 	Play(SOUND_TEST);
 }
 
-Sound::Sound()
-{
 
-
-
-}
 
 Sound::~Sound()
 {

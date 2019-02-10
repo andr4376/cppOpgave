@@ -4,22 +4,22 @@
 #include "GameWorld.h"
 #include "GameObject.h"
 #include "Sound.h"
-
+#include "Vector2.h"
 
 
 int main()
 {
 	TEST_AUDIO
-
-		glfwInit(); //Initialisering af glfw
+	glfwInit(); //Initialisering af glfw
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2); //Sætte øvre OpenGl version
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0); //Sætte nedre OpenGl Version
 
-	glViewport(0, 0, 800, 600); //Oprettet en viewport gennem OpenGL kald
+	glViewport(0, 0, SCREEN_HEIGHT, SCREEN_WIDHT); //Oprettet en viewport gennem OpenGL kald
 
 
 
 	GameWorld::GetInstance();
+
 
 	GameWorld::GetInstance()->GameLoop();
 

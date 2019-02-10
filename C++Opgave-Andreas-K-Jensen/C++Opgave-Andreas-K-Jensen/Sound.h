@@ -14,7 +14,7 @@ public:
 	static void Play(const char audioFile[]);
 	static void Play();
 
-	Sound();
+
 	~Sound();
 };
 

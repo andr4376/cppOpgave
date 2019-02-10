@@ -6,13 +6,8 @@
 //Removes Pointers. 
 #define  REMOVE_PTR(ptr) if (ptr != nullptr) {delete ptr; ptr = nullptr;}
 
-	
-
-
-
-
-
-
+#define SCREEN_WIDHT 800
+#define SCREEN_HEIGHT 600
 
 #pragma region DEBUG/RELEASE Macros
 
@@ -25,6 +20,7 @@
 
 #ifdef __RELEASE__
 #define TEST_AUDIO 
+#define DEBUG_LOG(x) 
 
 #endif // __RELEASE__
 

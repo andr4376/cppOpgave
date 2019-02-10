@@ -1,3 +1,4 @@
+
 #include "MovingEntity.h"
 #include "Time.h"
 #define DEFAULT_SPEED 1;

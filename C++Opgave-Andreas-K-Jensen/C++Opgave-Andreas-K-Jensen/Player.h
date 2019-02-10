@@ -10,6 +10,8 @@ public:
 	void Update();
 	Player();
 	Player(int x, int y, int z, float speed);
+	Player(int x, int y, int z);
+
 
 	~Player();
 };

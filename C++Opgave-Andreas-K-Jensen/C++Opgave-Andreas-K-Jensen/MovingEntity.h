@@ -18,9 +18,9 @@ public:
 
 protected:
 	int direction;
+	float speed;
 
 private:
-	float speed;
 	void Move();
 
 };
