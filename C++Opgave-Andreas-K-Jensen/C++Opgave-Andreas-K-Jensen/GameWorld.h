@@ -1,3 +1,8 @@
+#ifndef GAMEWORLD_H
+#define GAMEWORLD_H
+
+
+
 #include <GLFW\glfw3.h>
 #include "GameObject.h"
 #include <vector>
@@ -22,6 +27,7 @@ public:
 	static GLFWwindow& GetWindow();
 
 
-	
+
 };
 
+#endif // !GAMEWORLD_H

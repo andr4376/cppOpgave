@@ -20,9 +20,13 @@ void Player::Update()
 	MovingEntity::Update();
 }
 
-Player::Player()
+Player::Player() : MovingEntity()
 {
-	
+
+}
+
+Player::Player(int x, int y, int z, float speed) : MovingEntity(x, y, z, speed)
+{
 }
 
 

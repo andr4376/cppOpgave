@@ -1,10 +1,10 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
+#include "Globals.h"
 #include <SOIL.h>
 #include <GLFW\glfw3.h>
 
-//Removes Pointers. 
-#define REMOVE_PTR(x) delete x; x = nullptr; // TODO: Find appropriate location. Research: Why is it globally accessible here, but not GameWorld?
+
 
 
 class GameObject

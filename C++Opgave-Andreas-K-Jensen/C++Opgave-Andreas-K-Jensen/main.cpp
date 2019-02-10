@@ -1,3 +1,4 @@
+#include "Globals.h"
 #include <iostream>
 #include <GLFW\glfw3.h>
 #include "GameWorld.h"
@@ -8,15 +9,15 @@
 
 int main()
 {
+	TEST_AUDIO
 
-	glfwInit(); //Initialisering af glfw
+		glfwInit(); //Initialisering af glfw
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2); //Sætte øvre OpenGl version
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0); //Sætte nedre OpenGl Version
 
 	glViewport(0, 0, 800, 600); //Oprettet en viewport gennem OpenGL kald
 
 
-	Sound::Play();
 
 	GameWorld::GetInstance();
 

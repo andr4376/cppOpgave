@@ -1,4 +1,7 @@
-#pragma once
+#ifndef MOVING_ENTITY_H
+#define MOVING_ENTITY_H
+
+
 #include "GameObject.h"
 class MovingEntity :
 	public GameObject
@@ -22,3 +25,4 @@ private:
 
 };
 
+#endif // !MOVING_ENTITY_H

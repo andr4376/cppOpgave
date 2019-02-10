@@ -1,3 +1,4 @@
+#include "Globals.h"
 #include "GameWorld.h"
 #include "Player.h"
 #include <chrono>
@@ -29,7 +30,7 @@ GameWorld::GameWorld()
 
 	gameObjects.push_back(go);
 
-	Player* d = new Player();
+	Player* d = new Player(0,0,0,5);
 
 	gameObjects.push_back(d);
 
@@ -48,11 +49,12 @@ GameWorld::~GameWorld()
 {
 
 	REMOVE_PTR(instance);
-
+	
 
 	for (GameObject* go : gameObjects)
 	{
-		REMOVE_PTR(go);
+		REMOVE_PTR(go);		
+
 	}
 }
 
@@ -69,9 +71,11 @@ void GameWorld::GameLoop()
 
 		auto finish = std::chrono::high_resolution_clock::now();
 
-		
+
 
 		Time::Stop();
+
+
 	}
 }
 
@@ -112,7 +116,7 @@ void GameWorld::Render()
 
 GameWorld* GameWorld::GetInstance()
 {
-	if (instance == 0)
+	if (instance == nullptr)
 	{
 		instance = new GameWorld();
 	}

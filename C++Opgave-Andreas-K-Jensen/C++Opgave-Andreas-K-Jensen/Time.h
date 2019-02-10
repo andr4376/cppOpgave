@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SOUND_H
+#define SOUND_H
+
 #include <chrono>
 
 class Time
@@ -13,3 +15,4 @@ public:
 	~Time();
 };
 
+#endif // !SOUND_H
