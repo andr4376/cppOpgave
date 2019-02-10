@@ -16,7 +16,6 @@ GameObject::GameObject(float _x, float _y, float _z)
 	glBindTexture(GL_TEXTURE_2D, sprite); //Binder teksturen (dvs. indlæser den i GPU hukommelsen)
 
 
-	direction = 1;
 }
 
 
@@ -41,6 +40,5 @@ void GameObject::Render()
 
 void GameObject::Update()
 {
-	x += direction * 0.001;
 
 }

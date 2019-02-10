@@ -1,21 +1,27 @@
 #include <GLFW\glfw3.h>
 #include "GameObject.h"
 #include <vector>
+
+
 class GameWorld
 {
 private:
-	GLFWwindow * window;
-	GameObject * tmpGO; //Her kunne der med fordel bruges en vector med GameObject * i stedet for
 	std::vector<GameObject*> gameObjects;
+
+	GameWorld();
+	~GameWorld();
+
+	void GameLogic();
+	void Render();
+	GLFWwindow * window;
 
 public:
 
-	GameWorld(GLFWwindow * windowContext);
-	~GameWorld();
 	void GameLoop();
+	static GameWorld* GetInstance();
+	static GLFWwindow& GetWindow();
 
-private:
-	void GameLogic();
-	void Render();
+
+	
 };
 
