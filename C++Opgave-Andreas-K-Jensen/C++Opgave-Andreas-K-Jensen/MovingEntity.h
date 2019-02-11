@@ -8,16 +8,17 @@ class MovingEntity :
 {
 public:
 	MovingEntity();
-	MovingEntity(int x,int y, int z);
-	MovingEntity(int x, int y, int z, float speed);
+	MovingEntity(Vector2 _pos);
+	MovingEntity(Vector2 _pos, float speed);
+	MovingEntity(Vector2 _pos, float speed, float _size);
 	MovingEntity(float speed);
 
 	~MovingEntity();
-	int GetDirection();
+	Vector2  GetDirection();
 	void Update();
 
 protected:
-	int direction;
+	Vector2 direction;
 	float speed;
 
 private:

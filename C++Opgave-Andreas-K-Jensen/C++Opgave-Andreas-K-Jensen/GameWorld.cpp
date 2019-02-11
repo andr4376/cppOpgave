@@ -4,33 +4,35 @@
 #include <chrono>
 #include "Time.h"
 #include<iostream>
-static GameWorld* instance = nullptr;
+
+static GameWorld* instancePtr = nullptr;
 
 void size_resize_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
 
-///Private Constructor for gameworld (Singleton pattern)
+//Private Constructor for gameworld (Singleton pattern)
 GameWorld::GameWorld()
 {
-	if (window == nullptr)
+	if (windowPtr == nullptr)
 	{
-		window = glfwCreateWindow(800, 600, "Andreas K Jensen", NULL, NULL);
-		if (window == NULL)
+		windowPtr = glfwCreateWindow(800, 600, "Andreas K Jensen", NULL, NULL);
+
+		if (windowPtr == NULL)
 		{
 			glfwTerminate();
 			return;
 		}
-		glfwMakeContextCurrent(window); //Sørger for at OpenGL Bruger vinduet som renderings context
+		glfwMakeContextCurrent(windowPtr); //Sørger for at OpenGL Bruger vinduet som renderings context
 
 	}
 
-	GameObject* go = new GameObject();
+	GameObject* go = new GameObject(Vector2());
 
 	gameObjects.push_back(go);
 
-	Player* d = new Player(0, -1, 0, 5);
+	Player* d = new Player(Vector2(), PLAYER_SPEED, PLAYER_SIZE);
 
 	gameObjects.push_back(d);
 
@@ -40,7 +42,7 @@ GameWorld::GameWorld()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glfwSetFramebufferSizeCallback(window, size_resize_callback); //Sikre at hvis vinduets størrelse ændres ændres viewport også
+	glfwSetFramebufferSizeCallback(windowPtr, size_resize_callback); //Sikre at hvis vinduets størrelse ændres ændres viewport også
 
 }
 
@@ -48,12 +50,12 @@ GameWorld::GameWorld()
 GameWorld::~GameWorld()
 {
 
-	REMOVE_PTR(instance);
+	REMOVE_PTR(instancePtr);
 
 
-	for (GameObject* go : gameObjects)
+	for (GameObject* goPtr : gameObjects)
 	{
-		REMOVE_PTR(go);
+		REMOVE_PTR(goPtr);
 
 	}
 }
@@ -62,7 +64,7 @@ void GameWorld::GameLoop()
 {
 	DEBUG_LOG("Entering Game Loop");
 
-	while (!glfwWindowShouldClose(window)) // Køre så længe glfw vinduet ikke har fået besked på at lukke (f.eks. tryk på X knappen)
+	while (!glfwWindowShouldClose(windowPtr)) // Køre så længe glfw vinduet ikke har fået besked på at lukke (f.eks. tryk på X knappen)
 	{
 		Time::Start(); //Start timer, to measure update timespan
 
@@ -87,9 +89,9 @@ void GameWorld::GameLogic()
 
 
 
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) //Tjekker op på at ESC er trykket ned, hvis ja luk vinduet
+	if (glfwGetKey(windowPtr, GLFW_KEY_ESCAPE) == GLFW_PRESS) //Tjekker op på at ESC er trykket ned, hvis ja luk vinduet
 	{
-		glfwSetWindowShouldClose(window, true);
+		glfwSetWindowShouldClose(windowPtr, true);
 	}
 
 
@@ -98,7 +100,7 @@ void GameWorld::GameLogic()
 
 void GameWorld::Render()
 {
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClearColor(1, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glLoadIdentity(); //Null stiller OpenGL matrise
@@ -108,24 +110,26 @@ void GameWorld::Render()
 		go->Render();
 	}
 
-	glfwSwapBuffers(window);
+	glfwSwapBuffers(windowPtr);
 
 }
 
-GameWorld* GameWorld::GetInstance()
+GameWorld& GameWorld::GetInstanceRef()
 {
-	if (instance == nullptr)
+	if (instancePtr == nullptr)
 	{
-		instance = new GameWorld();
+		instancePtr = new GameWorld();
 	}
 
-	return instance;
+	return *instancePtr;
 
 }
 
+//returns a reference of the game's window
 GLFWwindow & GameWorld::GetWindow()
 {
-	GLFWwindow& win = *GetInstance()->window;
+	//the window reference = the value of the window pointer, stored on the singleton instance 
+	GLFWwindow& win = *instancePtr->windowPtr;
 
 	return win;
 

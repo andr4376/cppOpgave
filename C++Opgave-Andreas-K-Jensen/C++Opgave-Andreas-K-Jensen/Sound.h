@@ -11,8 +11,8 @@ using namespace irrklang;
 class Sound
 {
 public:
-	static void Play(const char audioFile[]);
-	static void Play();
+	static void Play(const char audioFile[]); //play a specefic file
+	static void Play(); //plays test sound
 
 
 	~Sound();

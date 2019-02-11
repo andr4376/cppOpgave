@@ -3,25 +3,29 @@
 #include "Time.h"
 #define DEFAULT_SPEED 1;
 
-MovingEntity::MovingEntity() : GameObject(0,0,0)
+MovingEntity::MovingEntity() : GameObject(Vector2())
 {
 	speed = DEFAULT_SPEED;
-	direction = 0;
+	direction = Vector2();
 }
 
-MovingEntity::MovingEntity(int x, int y, int z) :GameObject(x, y, z)
+MovingEntity::MovingEntity(Vector2 _pos) :GameObject(_pos)
 {
 	speed = DEFAULT_SPEED;
-	direction = 0;
+	direction = Vector2();
 }
 
-MovingEntity::MovingEntity(int x, int y, int z, float _speed) :GameObject(x, y, z)
+MovingEntity::MovingEntity(Vector2 _pos, float _speed) :GameObject(_pos)
 {
 	speed = _speed;
-	direction = 0;
+	direction = Vector2();
+}
+MovingEntity::MovingEntity(Vector2 _pos, float _speed, float _size) : GameObject(_pos, _size)
+{
+	speed = _speed;
 }
 
-MovingEntity::MovingEntity(float _speed) :MovingEntity()
+MovingEntity::MovingEntity(float _speed) : MovingEntity()
 {
 	speed = _speed;
 }
@@ -32,14 +36,16 @@ MovingEntity::~MovingEntity()
 {
 }
 
-int MovingEntity::GetDirection()
+Vector2  MovingEntity::GetDirection()
 {
 	return direction;
 }
 
 void MovingEntity::Move()
 {
-	this->x += (direction * speed) * Time::GetDeltaTime(); //TODO: add deltatime
+	direction.Normalize();
+
+	this->position += (direction * speed) * Time::GetDeltaTime();
 
 }
 

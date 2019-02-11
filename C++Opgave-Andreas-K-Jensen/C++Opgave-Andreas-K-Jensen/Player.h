@@ -9,8 +9,10 @@ public:
 
 	void Update();
 	Player();
-	Player(int x, int y, int z, float speed);
-	Player(int x, int y, int z);
+	Player(Vector2 _pos, float speed);
+	Player(Vector2 _pos, float speed,float _size);
+
+	Player(Vector2 _pos);
 
 
 	~Player();

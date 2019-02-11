@@ -1,6 +1,17 @@
 #ifndef VECTOR_2
 #define VECTOR_2
 #include <math.h>
+
+//Predetermined directions
+#define VECTOR_ZERO Vector2(0,0)
+#define VECTOR_UP Vector2(0,1)
+#define VECTOR_DOWN Vector2(0,-1)
+#define VECTOR_LEFT Vector2(-1,0)
+#define VECTOR_RIGHT Vector2(1,0)
+
+
+//A struct containing an x and a y coordinate/point
+//Also contains vector math
 struct Vector2
 {
 	float x;
@@ -12,8 +23,13 @@ struct Vector2
 
 	//Allows adding vectors together 
 	Vector2 operator + (Vector2 otherVector); //operator overload
+	void operator += (Vector2 otherVector); //adds another vector on this vector
+	Vector2 operator * (float multiplication);
+
 	void Normalize();
 	float Magnitude();
+	float Distance(Vector2 othervector);
+	static float Distance(Vector2 a, Vector2 b);
 
 };
 

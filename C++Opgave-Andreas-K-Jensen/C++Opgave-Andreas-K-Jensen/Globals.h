@@ -1,14 +1,22 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
+//This .h file contains global functions, variables, macros and definitions
 
 
-
-//Removes Pointers. 
+//Macro that removes Pointers. 
+//TODO: caution! consider making <template>funtion instead, this macro is not unsafe
 #define  REMOVE_PTR(ptr) if (ptr != nullptr) {delete ptr; ptr = nullptr;}
 
+
+//game window settings
 #define SCREEN_WIDHT 800
 #define SCREEN_HEIGHT 600
 
+//game settings
+#define PLAYER_SPEED 1
+#define PLAYER_SIZE 10
+
+//Macros that will change/disable functionality depending on Configuration (debug / release)
 #pragma region DEBUG/RELEASE Macros
 
 #ifdef __DEBUG__

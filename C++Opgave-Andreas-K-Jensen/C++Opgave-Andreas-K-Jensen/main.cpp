@@ -18,10 +18,10 @@ int main()
 
 
 
-	GameWorld::GetInstance();
+	GameWorld::GetInstanceRef();
 
 
-	GameWorld::GetInstance()->GameLoop();
+	GameWorld::GetInstanceRef().GameLoop();
 
 
 
