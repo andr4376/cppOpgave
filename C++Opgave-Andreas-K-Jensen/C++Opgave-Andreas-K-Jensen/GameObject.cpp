@@ -35,6 +35,11 @@ GameObject::~GameObject()
 {
 }
 
+float GameObject::GetSize()
+{
+	return size;
+}
+
 void GameObject::Render()
 {
 	glPushMatrix(); //Lægger en matrise på stakken, således kun denne manipuleres

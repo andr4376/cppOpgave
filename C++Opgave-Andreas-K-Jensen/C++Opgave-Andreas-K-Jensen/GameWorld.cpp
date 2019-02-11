@@ -28,13 +28,16 @@ GameWorld::GameWorld()
 
 	}
 
-	GameObject* go = new GameObject(VECTOR_ZERO,15);
+	GameObject* go = new GameObject(VECTOR_ZERO, 15);
+	Collider* goC = new Collider(go);
 
 	gameObjects.push_back(go);
+	colliders.push_back(goC);
 
-	Player* d = new Player();
-
+	Player* d = new Player(VECTOR_LEFT,0.1);
+	Collider* dC = new Collider(d);
 	gameObjects.push_back(d);
+	colliders.push_back(dC);
 
 
 	glEnable(GL_TEXTURE_2D); //Aktivere tektur mapning
@@ -56,7 +59,10 @@ GameWorld::~GameWorld()
 	for (GameObject* goPtr : gameObjects)
 	{
 		REMOVE_PTR(goPtr);
-
+	}
+	for (Collider* colliderPtr : colliders)
+	{
+		REMOVE_PTR(colliderPtr);
 	}
 }
 
@@ -84,11 +90,15 @@ void GameWorld::GameLoop()
 void GameWorld::GameLogic()
 {
 
-	for (GameObject* go : gameObjects)
+	for (GameObject* goPtr : gameObjects)
 	{
-		go->Update();
+		goPtr->Update();
 	}
 
+	for (Collider* colliderPtr : colliders)
+	{
+		colliderPtr->CheckCollision();
+	}
 
 
 	if (glfwGetKey(windowPtr, GLFW_KEY_ESCAPE) == GLFW_PRESS) //Tjekker op på at ESC er trykket ned, hvis ja luk vinduet
@@ -102,7 +112,7 @@ void GameWorld::GameLogic()
 
 void GameWorld::Render()
 {
-	glClearColor(0,0,0,0);
+	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glLoadIdentity(); //Null stiller OpenGL matrise
@@ -136,4 +146,9 @@ GLFWwindow & GameWorld::GetWindow()
 	return win;
 
 
+}
+
+std::vector<Collider*>& GameWorld::GetColliders()
+{
+	return colliders;
 }

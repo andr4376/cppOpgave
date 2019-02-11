@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include "MovingEntity.h"
-#include "Time.h";
+#include "Time.h"
 
 class Player :
 	public MovingEntity

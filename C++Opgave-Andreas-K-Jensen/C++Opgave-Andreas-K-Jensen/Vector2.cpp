@@ -51,7 +51,7 @@ void Vector2::Normalize()
 
 
 
-float Vector2::Distance(Vector2 othervector)
+float Vector2::Distance(Vector2 othervector) 
 {
 	float a, b, c;
 

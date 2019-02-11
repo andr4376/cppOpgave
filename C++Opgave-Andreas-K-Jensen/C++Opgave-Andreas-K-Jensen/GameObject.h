@@ -21,7 +21,7 @@ public:
 	GameObject(Vector2 _pos, float _size); //constructor with position and size
 
 	~GameObject();//destructor
-
+	float GetSize();
 	Vector2 GetPosition(); //returns position
 	virtual void Render(); //draws the game object (overridable)
 	virtual void Update();// updates the game object's logic (overridable)

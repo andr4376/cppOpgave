@@ -12,7 +12,7 @@ Player::Player() : Player(VECTOR_ZERO, PLAYER_SPEED, PLAYER_SIZE)
 {
 }
 
-Player::Player(Vector2 _pos, float _speed) : MovingEntity(_pos, _speed)
+Player::Player(Vector2 _pos, float _speed) : MovingEntity(_pos, _speed, PLAYER_SIZE)
 {
 	sprite = SOIL_load_OGL_texture(PLAYER_TEXTURE, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 
@@ -38,10 +38,8 @@ void Player::Update()
 	DampenMovement(); //dampens movement. If no movementkeys are pressed, it will float
 
 	HandleInput(); //Changes direction based on keypress
-
-
-	DEBUG_LOG("x:" << position.x << "  y:" << position.y);
-	DEBUG_LOG("dir x:" << direction.x << "  dir y:" << direction.y);
+	
+	
 
 	//direction is normalized Move() , which is called in MovingEntity::Update() 
 	MovingEntity::Update(); //Moves the player, based on its direction
@@ -105,7 +103,7 @@ void Player::HandleInput()
 //Overrides Moving entities Move()
 void Player::Move()
 {
-	if (movementInput) //if player has pressed a movement button
+	if (movementInput || direction.Magnitude()>1) //if player has pressed a movement button, or the direction magnitude >1
 		direction.Normalize(); //Make sure the direction's magnitude remains 1 
 	//if no movement input - don't normalize (creates floating effect)
 
