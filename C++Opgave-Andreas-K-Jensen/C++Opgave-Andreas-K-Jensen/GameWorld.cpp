@@ -1,8 +1,8 @@
 #include "Globals.h"
 #include "GameWorld.h"
 #include "Player.h"
-#include <chrono>
 #include "Time.h"
+#include<thread>
 #include<iostream>
 
 static GameWorld* instancePtr = nullptr;
@@ -28,11 +28,11 @@ GameWorld::GameWorld()
 
 	}
 
-	GameObject* go = new GameObject(Vector2());
+	GameObject* go = new GameObject(VECTOR_ZERO,15);
 
 	gameObjects.push_back(go);
 
-	Player* d = new Player(Vector2(), PLAYER_SPEED, PLAYER_SIZE);
+	Player* d = new Player();
 
 	gameObjects.push_back(d);
 
@@ -73,6 +73,8 @@ void GameWorld::GameLoop()
 
 		glfwPollEvents();
 
+		//std::this_thread::sleep_for(std::chrono::milliseconds(32)); //fps
+
 		Time::Stop(); // stops timer, saves elapsed time (deltatime)
 	}
 	DEBUG_LOG("Exiting Game Loop");
@@ -100,7 +102,7 @@ void GameWorld::GameLogic()
 
 void GameWorld::Render()
 {
-	glClearColor(1, 0.3f, 0.3f, 1.0f);
+	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glLoadIdentity(); //Null stiller OpenGL matrise

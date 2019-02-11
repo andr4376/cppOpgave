@@ -21,8 +21,8 @@ protected:
 	Vector2 direction;
 	float speed;
 
+	virtual void Move();
 private:
-	void Move();
 
 };
 

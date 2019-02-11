@@ -29,10 +29,17 @@ Vector2 Vector2::operator*(float multiplication)
 	return Vector2(x*multiplication, y*multiplication);
 }
 
+void Vector2::operator*=(float multiplication)
+{
+	x *= multiplication;
+	y *= multiplication;
+}
+
 float Vector2::Magnitude()
 {
 	return sqrt(x*x + y * y);
 }
+
 void Vector2::Normalize()
 {
 	if (x == 0 && y == 0)return;

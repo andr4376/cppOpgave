@@ -25,6 +25,8 @@ struct Vector2
 	Vector2 operator + (Vector2 otherVector); //operator overload
 	void operator += (Vector2 otherVector); //adds another vector on this vector
 	Vector2 operator * (float multiplication);
+	void operator *= (float multiplication);
+
 
 	void Normalize();
 	float Magnitude();

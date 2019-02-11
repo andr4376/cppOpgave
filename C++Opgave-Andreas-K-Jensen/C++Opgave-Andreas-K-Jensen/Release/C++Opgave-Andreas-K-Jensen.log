@@ -1,14 +1,18 @@
 ﻿  GameObject.cpp
   GameWorld.cpp
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\player.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   Globals.cpp
   main.cpp
   MovingEntity.cpp
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\movingentity.cpp(11): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Player.cpp
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\player.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Sound.cpp
   Time.cpp
+  Vector2.cpp
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(40): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   Generating code
-  0 of 229 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  31 of 237 functions (13.1%) were compiled, the rest were copied from previous compilation.
+    14 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   C++Opgave-Andreas-K-Jensen.vcxproj -> D:\Code projects\C++\Opgave\cppOpgave\C++Opgave-Andreas-K-Jensen\Release\C++Opgave-Andreas-K-Jensen.exe

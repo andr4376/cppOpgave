@@ -12,12 +12,17 @@ GameObject::GameObject() : GameObject(Vector2())
 
 GameObject::GameObject(Vector2 _pos)
 {
+
 	position = _pos;
 
-	sprite = SOIL_load_OGL_texture(DUMMY_TEXTURE, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (sprite == NULL)
+	{
+		sprite = SOIL_load_OGL_texture(DUMMY_TEXTURE, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	}
+
+
 
 	glBindTexture(GL_TEXTURE_2D, sprite); //Binder teksturen (dvs. indlæser den i GPU hukommelsen)
-
 
 }
 

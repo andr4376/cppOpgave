@@ -8,12 +8,11 @@
 
 class GameObject
 {
-private:
-	GLuint sprite; //texture of game object
 
 protected:
 	Vector2 position; //it's position in a 2d space
 	float size = 1;
+	GLuint sprite = NULL; //texture of game object
 
 public:
 
