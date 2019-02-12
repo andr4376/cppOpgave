@@ -35,6 +35,8 @@ public:
 	virtual void Render(); //draws the game object (overridable)
 	virtual void Update();// updates the game object's logic (overridable)
 	virtual void OnCollisionEnter(GameObject& goRef);//
+	virtual void OnCollisionStay(GameObject& goRef);//
+	virtual void OnCollisionExit(GameObject& goRef);//
 
 };
 

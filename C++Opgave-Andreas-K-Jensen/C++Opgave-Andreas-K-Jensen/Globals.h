@@ -24,6 +24,8 @@
 #define PLAYER_SPEED 1
 #define PLAYER_SIZE 10
 #define PLAYER_BASE_HEALTH  3
+#define PLAYER_MOVEMENT_DAMPENING -2
+
 
 //Objects in general
 #define DEFAULT_OBJECT_SIZE 15

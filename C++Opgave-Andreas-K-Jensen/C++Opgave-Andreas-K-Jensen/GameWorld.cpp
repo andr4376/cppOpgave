@@ -118,7 +118,7 @@ void GameWorld::SetupWindow()
 	if (windowPtr == nullptr)
 	{
 
-		windowPtr = glfwCreateWindow(SCREEN_WIDHT, SCREEN_HEIGHT, "Andreas K Jensen", FULLSCREEN_IF_RELEASE, NULL);
+		windowPtr = glfwCreateWindow(SCREEN_WIDHT, SCREEN_HEIGHT, "Andreas K Jensen", NULL, NULL);
 
 		if (windowPtr == NULL)
 		{
@@ -139,17 +139,17 @@ void GameWorld::SetupWindow()
 
 void GameWorld::PlaceGameObjects()
 {
-	GameObject* go = new GameObject(VECTOR_ZERO, DEFAULT_OBJECT_SIZE);
+	/*GameObject* go = new GameObject(VECTOR_ZERO, DEFAULT_OBJECT_SIZE);
 	Collider* goC = new Collider(go);
 
 	gameObjects.push_back(go);
-	colliders.push_back(goC);
+	colliders.push_back(goC);*/
 
-	/*Asteroid* mGo = new Asteroid(Vector2(-2, 0));
-	Collider* mGoC = new Collider(mGo);
+	//Asteroid* mGo = new Asteroid(Vector2(-2, 0));
+	//Collider* mGoC = new Collider(mGo);
 
-	gameObjects.push_back(mGo);
-	colliders.push_back(mGoC);*/
+	//gameObjects.push_back(mGo);
+	//colliders.push_back(mGoC);
 
 	//asteroids
 	Asteroid* mGo = new Asteroid(Vector2(-1, 0), ASTEROID_MAX_SIZE, VECTOR_DOWN + VECTOR_RIGHT);
@@ -165,7 +165,7 @@ void GameWorld::PlaceGameObjects()
 	colliders.push_back(mGoC2);
 
 	Asteroid* mGo3 = new Asteroid(VECTOR_UP, 15, Vector2(-0.3, 0.33));
-	Collider* mGoC3 = new Collider(mGo2);
+	Collider* mGoC3 = new Collider(mGo3);
 
 	gameObjects.push_back(mGo3);
 	colliders.push_back(mGoC3);
@@ -202,8 +202,9 @@ void GameWorld::RemoveGameObjects()
 	{
 		gameObjects.erase(std::remove(gameObjects.begin(), gameObjects.end(), go), gameObjects.end());
 
-		delete go;
-		go = nullptr;
+		REMOVE_PTR(go);
+
+
 	}
 	gameObjectsToRemove.clear();
 
@@ -225,13 +226,31 @@ void GameWorld::AddColliders()
 
 void GameWorld::RemoveColliders()
 {
-	for (Collider* collPtr : collidersToRemove)
+	for (Collider* collToRemove : collidersToRemove) //for each collider we want to remove
 	{
-		colliders.erase(std::remove(colliders.begin(), colliders.end(), collPtr), colliders.end());
+		//remove it from gw's collider list
+		colliders.erase(std::remove(colliders.begin(), colliders.end(), collToRemove), colliders.end());
 
-		delete collPtr;
-		collPtr = nullptr;
+
+		//for each collider in gw's collider
+		for (Collider* collider : instancePtr->colliders)
+		{
+			//for each of known collider in that collider
+			for (Collider* colliderCollider : collider->otherColliders)
+			{
+				//if that collider is the one we're removing
+				if (colliderCollider == collToRemove)
+				{
+					//remove it from that colliders "other colliders"
+					collider->otherColliders.erase(std::remove(collider->otherColliders.begin(),
+						collider->otherColliders.end(), collToRemove), collider->otherColliders.end());
+				}
+			}
+		}
+		//Delete ptr
+		REMOVE_PTR(collToRemove);
 	}
+
 	collidersToRemove.clear();
 }
 

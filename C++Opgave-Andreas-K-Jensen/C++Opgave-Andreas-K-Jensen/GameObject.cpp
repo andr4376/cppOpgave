@@ -98,3 +98,11 @@ void GameObject::OnCollisionEnter(GameObject & goRef)
 	DEBUG_LOG("Gameobject collision enter");
 	DEBUG_LOG(entityType);
 }
+
+void GameObject::OnCollisionStay(GameObject & goRef)
+{
+}
+
+void GameObject::OnCollisionExit(GameObject & goRef)
+{
+}

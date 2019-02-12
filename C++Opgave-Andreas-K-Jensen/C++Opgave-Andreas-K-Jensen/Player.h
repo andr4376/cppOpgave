@@ -16,6 +16,8 @@ class Player :
 private:
 	bool movementInput; //If no input, allows player to float
 	float movementDampeningFactor; //floating intensity when no input
+	GLuint healthBarSprite = NULL; //texture of game object
+
 public:
 
 	void Update();

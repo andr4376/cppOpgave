@@ -12,12 +12,14 @@ class Collider
 
 private:
 	GameObject* gameObject;
-	std::vector<Collider*> otherColliders;
-	std::vector<Collider*> otherCollidersToRemove;
+
+	void RemoveKnownColliders();
 public:
 	Collider(GameObject* _gameObject);
 	~Collider();
 
+	std::vector<Collider*> otherColliders;
+	std::vector<Collider*> otherCollidersToRemove;
 	GameObject* GetGameObject();
 	Circle GetCollisionBox();
 	void CheckCollision();

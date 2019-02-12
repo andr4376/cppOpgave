@@ -2,7 +2,6 @@
 d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(52): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(54): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  Circle.cpp
   Collider.cpp
   GameObject.cpp
   GameWorld.cpp
@@ -10,22 +9,22 @@ d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andre
 d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\gameworld.cpp(167): warning C4305: 'argument': truncation from 'double' to 'float'
   Globals.cpp
   KillAble.cpp
-  main.cpp
   MovingEntity.cpp
 d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\movingentity.cpp(7): warning C4305: 'argument': truncation from 'double' to 'float'
 d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\movingentity.cpp(12): warning C4305: 'argument': truncation from 'double' to 'float'
   Player.cpp
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\player.cpp(180): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\player.cpp(186): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\player.cpp(187): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\player.cpp(187): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\player.cpp(188): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\player.cpp(188): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\player.cpp(189): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   Time.cpp
-  Vector2.cpp
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(103): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(104): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(104): warning C4552: '-': result of expression not used
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(106): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(107): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(107): warning C4552: '-': result of expression not used
+  main.cpp
   Generating code
-  101 of 392 functions (25.8%) were compiled, the rest were copied from previous compilation.
-    49 functions were new in current compilation
-    39 functions had inline decision re-evaluated but remain unchanged
+  41 of 397 functions (10.3%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    8 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   C++Opgave-Andreas-K-Jensen.vcxproj -> D:\Code projects\C++\Opgave\cppOpgave\C++Opgave-Andreas-K-Jensen\Release\C++Opgave-Andreas-K-Jensen.exe

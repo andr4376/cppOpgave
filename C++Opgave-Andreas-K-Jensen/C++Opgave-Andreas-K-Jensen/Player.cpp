@@ -2,8 +2,8 @@
 #include "GameWorld.h"
 #include<iostream>
 
-#define PLAYER_MOVEMENT_DAMPENING -2
 #define PLAYER_TEXTURE "player.png"
+#define PLAYER_HEALTHBAR_TEXTURE "healthBar.png"
 
 #pragma region Constructors
 
@@ -23,6 +23,9 @@ Player::Player(Vector2 _pos, float _speed) : Player(_pos, _speed, PLAYER_SIZE)
 Player::Player(Vector2 _pos, float _speed, float _size) : MovingEntity(_pos, _speed, _size)
 {
 	sprite = SOIL_load_OGL_texture(PLAYER_TEXTURE, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+
+	healthBarSprite = SOIL_load_OGL_texture(PLAYER_HEALTHBAR_TEXTURE, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	glBindTexture(GL_TEXTURE_2D, healthBarSprite); //load healthbarsprite to gpu
 
 	entityType = PLAYER;
 
@@ -156,7 +159,7 @@ void Player::Die()
 	{
 		if (colPtr->GetGameObject() == this)
 		{
-			colPtr = myColPtr;
+			myColPtr = colPtr;
 			break;
 		}
 	}
@@ -174,19 +177,17 @@ void Player::Render()
 
 void Player::DrawHealth()
 {
-	//TODO: visualize playe rhealth
-	float widht = 0.33 * health;
+	float healthBarWidht = 0.33 * health; //widht of the healbar
 
-	glPushMatrix(); //Lægger en matrise på stakken, således kun denne manipuleres
-	glBindTexture(GL_TEXTURE_2D, sprite); //Binder teksturen (Anvender til ved rendering af vertices)
-	glBegin(GL_QUADS);
-	// Front Face
+	glPushMatrix(); 
+	glBindTexture(GL_TEXTURE_2D, healthBarSprite); 
 
-
+	glBegin(GL_QUADS);	
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.95, -0.95, 0); //bottom left
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1 + widht, -0.95, 0); //bottom right
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1 + widht, -0.9, 0); //top right
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.2 + healthBarWidht, -0.95, 0); //bottom right
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.2 + healthBarWidht, -0.9, 0); //top right
 	glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.95, -0.9, 0); //top left
 	glEnd();
-	glPopMatrix(); // Fjerner matrisen på stakken (dvs. nulstiller til udgangspunkt)
+
+	glPopMatrix(); 
 }
