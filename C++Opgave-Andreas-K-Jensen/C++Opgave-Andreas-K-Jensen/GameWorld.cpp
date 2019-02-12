@@ -15,37 +15,9 @@ void size_resize_callback(GLFWwindow* window, int width, int height)
 //Private Constructor for gameworld (Singleton pattern)
 GameWorld::GameWorld()
 {
-	if (windowPtr == nullptr)
-	{
-		windowPtr = glfwCreateWindow(800, 600, "Andreas K Jensen", NULL, NULL);
 
-		if (windowPtr == NULL)
-		{
-			glfwTerminate();
-			return;
-		}
-		glfwMakeContextCurrent(windowPtr); //Sørger for at OpenGL Bruger vinduet som renderings context
+	Init();
 
-	}
-
-	GameObject* go = new GameObject(VECTOR_ZERO, 15);
-	Collider* goC = new Collider(go);
-
-	gameObjects.push_back(go);
-	colliders.push_back(goC);
-
-	Player* d = new Player(VECTOR_LEFT,0.1);
-	Collider* dC = new Collider(d);
-	gameObjects.push_back(d);
-	colliders.push_back(dC);
-
-
-	glEnable(GL_TEXTURE_2D); //Aktivere tektur mapning
-	//Specificere hvorledes tekture interpoliseres over overflader
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glfwSetFramebufferSizeCallback(windowPtr, size_resize_callback); //Sikre at hvis vinduets størrelse ændres ændres viewport også
 
 }
 
@@ -79,7 +51,7 @@ void GameWorld::GameLoop()
 
 		glfwPollEvents();
 
-		//std::this_thread::sleep_for(std::chrono::milliseconds(32)); //fps
+		//std::this_thread::sleep_for(std::chrono::milliseconds(64)); //fps
 
 		Time::Stop(); // stops timer, saves elapsed time (deltatime)
 	}
@@ -124,6 +96,59 @@ void GameWorld::Render()
 
 	glfwSwapBuffers(windowPtr);
 
+}
+
+void GameWorld::Init()
+{
+	SetupWindow();
+
+	PlaceGameObjects();
+}
+
+void GameWorld::SetupWindow()
+{
+
+
+	if (windowPtr == nullptr)
+	{
+
+		windowPtr = glfwCreateWindow(SCREEN_WIDHT, SCREEN_HEIGHT, "Andreas K Jensen", FULLSCREEN_IF_RELEASE, NULL);
+
+		if (windowPtr == NULL)
+		{
+			glfwTerminate();
+			return;
+		}
+		glfwMakeContextCurrent(windowPtr); //Sørger for at OpenGL Bruger vinduet som renderings context
+
+	}
+
+
+	glEnable(GL_TEXTURE_2D); //Aktivere tektur mapning
+	//Specificere hvorledes tekture interpoliseres over overflader
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glfwSetFramebufferSizeCallback(windowPtr, size_resize_callback); //Sikre at hvis vinduets størrelse ændres ændres viewport også
+}
+
+void GameWorld::PlaceGameObjects()
+{
+	GameObject* go = new GameObject(VECTOR_ZERO, DEFAULT_OBJECT_SIZE);
+	Collider* goC = new Collider(go);
+
+	gameObjects.push_back(go);
+	colliders.push_back(goC);
+
+	MovingEntity* mGo = new MovingEntity(Vector2(0.5, 0.5),DEFAULT_MOVING_ENTITY_SPEED);
+	Collider* mGoC = new Collider(mGo);
+
+	gameObjects.push_back(mGo);
+	colliders.push_back(mGoC);
+
+	Player* d = new Player(VECTOR_LEFT, PLAYER_SPEED);
+	Collider* dC = new Collider(d);
+	gameObjects.push_back(d);
+	colliders.push_back(dC);
 }
 
 GameWorld& GameWorld::GetInstanceRef()

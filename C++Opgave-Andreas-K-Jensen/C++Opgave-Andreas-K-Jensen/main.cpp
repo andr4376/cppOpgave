@@ -14,7 +14,7 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2); //Sætte øvre OpenGl version
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0); //Sætte nedre OpenGl Version
 
-	glViewport(0, 0, SCREEN_HEIGHT, SCREEN_WIDHT); //Oprettet en viewport gennem OpenGL kald
+	glViewport(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT); //Oprettet en viewport gennem OpenGL kald
 
 
 

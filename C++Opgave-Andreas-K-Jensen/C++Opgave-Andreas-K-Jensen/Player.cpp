@@ -11,19 +11,22 @@
 Player::Player() : Player(VECTOR_ZERO, PLAYER_SPEED, PLAYER_SIZE)
 {
 }
-
-Player::Player(Vector2 _pos, float _speed) : MovingEntity(_pos, _speed, PLAYER_SIZE)
+Player::Player(Vector2 _pos) : Player(_pos, PLAYER_SPEED, PLAYER_SIZE)
 {
-	sprite = SOIL_load_OGL_texture(PLAYER_TEXTURE, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
-
 }
+
+Player::Player(Vector2 _pos, float _speed) : Player(_pos, _speed, PLAYER_SIZE)
+{
+}
+
+//The constructor where they all end up
 Player::Player(Vector2 _pos, float _speed, float _size) : MovingEntity(_pos, _speed, _size)
 {
 	sprite = SOIL_load_OGL_texture(PLAYER_TEXTURE, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 
-}
-Player::Player(Vector2 _pos) : Player(_pos, PLAYER_SPEED, PLAYER_SIZE)
-{
+
+	entityType = PLAYER;
+
 
 }
 #pragma endregion
@@ -32,14 +35,29 @@ Player::~Player()
 {
 }
 
+void Player::OnCollisionEnter(GameObject & goRef)
+{
+	DEBUG_LOG("player coll enter");
+
+	//TODO: take dmg if enemy
+
+	if (goRef.GetEntityType() == ENEMY)
+	{
+		TakeDamage();
+	}
+
+
+	MovingEntity::OnCollisionEnter(goRef);
+}
+
 void Player::Update()
 {
 
 	DampenMovement(); //dampens movement. If no movementkeys are pressed, it will float
 
 	HandleInput(); //Changes direction based on keypress
-	
-	
+
+
 
 	//direction is normalized Move() , which is called in MovingEntity::Update() 
 	MovingEntity::Update(); //Moves the player, based on its direction
@@ -58,15 +76,20 @@ void Player::DampenMovement()
 //Makes player stay inside the screen, if it tries to walk out of bounds
 void Player::StayInScreen()
 {
-	if (position.x <= LEFT_GAME_BORDER && direction.x < 0 //if its at the leftmost border and it tries to walk left
-		|| position.x >= RIGHT_GAME_BORDER && direction.x > 0)//if its at the rightmost border and it tries to walk right
+	if (position.x - (size / 100) <= LEFT_GAME_BORDER && direction.x < 0 //if its at the leftmost border and it tries to walk left
+		|| position.x + (size / 100) >= RIGHT_GAME_BORDER && direction.x > 0)//if its at the rightmost border and it tries to walk right
 	{
-		direction.x = 0;//don't walk in that horizontal direction
+		direction.x *= -1;//bounce horizontally
+
+		if (movementInput)direction.x = 0;//don't walk in that horizontal direction
 	}
-	if (position.y <= BOTTOM_GAME_BORDER && direction.y < 0 //if its at the bottom border and it tries to walk down
-		|| position.y >= TOP_GAME_BORDER && direction.y > 0)//if its at the top border and it tries to walk up
+	if (position.y - (size / 100) <= BOTTOM_GAME_BORDER && direction.y < 0 //if its at the bottom border and it tries to walk down
+		|| position.y + (size / 100) >= TOP_GAME_BORDER && direction.y > 0)//if its at the top border and it tries to walk up
 	{
-		direction.y = 0; //don't walk in that vertical direction
+		direction.y *= -1; //bounce vertically
+
+		if (movementInput)direction.y = 0;//don't walk in that vertical direction
+
 	}
 }
 
@@ -103,7 +126,7 @@ void Player::HandleInput()
 //Overrides Moving entities Move()
 void Player::Move()
 {
-	if (movementInput || direction.Magnitude()>1) //if player has pressed a movement button, or the direction magnitude >1
+	if (movementInput || direction.Magnitude() > 1) //if player has pressed a movement button, or the direction magnitude >1
 		direction.Normalize(); //Make sure the direction's magnitude remains 1 
 	//if no movement input - don't normalize (creates floating effect)
 

@@ -27,6 +27,7 @@ void Collider::CheckCollision()
 					== otherColliders.end()) //if returned item is the last item => Vector does not contain item
 				{
 					//oncollisionenter
+					gameObject->OnCollisionEnter(*pOther->gameObject);
 					DEBUG_LOG("CollisionEnter");
 					otherColliders.push_back(pOther);
 

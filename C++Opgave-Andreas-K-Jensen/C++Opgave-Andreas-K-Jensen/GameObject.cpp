@@ -6,13 +6,24 @@ Vector2 GameObject::GetPosition()
 	return position;
 }
 
+ENTITY_TYPE GameObject::GetEntityType()
+{
+	return entityType;
+}
+
 GameObject::GameObject() : GameObject(Vector2())
 {
 }
 
-GameObject::GameObject(Vector2 _pos)
+GameObject::GameObject(Vector2 _pos) : GameObject(_pos, PLAYER_SIZE)
 {
 
+}
+
+//the constructor all other constructors end up in
+GameObject::GameObject(Vector2 _pos, float _size)
+{
+	size = _size;
 	position = _pos;
 
 	if (sprite == NULL)
@@ -20,15 +31,9 @@ GameObject::GameObject(Vector2 _pos)
 		sprite = SOIL_load_OGL_texture(DUMMY_TEXTURE, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 	}
 
-
+	entityType = BLANK;
 
 	glBindTexture(GL_TEXTURE_2D, sprite); //Binder teksturen (dvs. indlæser den i GPU hukommelsen)
-
-}
-
-GameObject::GameObject(Vector2 _pos, float _size) : GameObject(_pos)
-{
-	size = _size;
 }
 
 GameObject::~GameObject()
@@ -60,4 +65,10 @@ void GameObject::Render()
 void GameObject::Update()
 {
 
+}
+
+void GameObject::OnCollisionEnter(GameObject & goRef)
+{
+	DEBUG_LOG("Gameobject collision enter");
+	DEBUG_LOG(entityType);
 }

@@ -26,6 +26,11 @@ private:
 	void Render(); //draws the whole game
 	GLFWwindow * windowPtr;
 
+	void Init();
+	void SetupWindow();
+	void PlaceGameObjects();
+
+
 public:
 
 

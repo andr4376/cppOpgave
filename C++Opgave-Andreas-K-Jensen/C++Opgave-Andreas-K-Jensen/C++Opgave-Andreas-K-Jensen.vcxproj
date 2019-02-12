@@ -125,11 +125,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="KillAble.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -138,11 +140,13 @@
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="KillAble.h" />
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sound.h" />

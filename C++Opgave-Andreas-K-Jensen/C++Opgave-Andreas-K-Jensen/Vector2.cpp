@@ -50,23 +50,28 @@ void Vector2::Normalize()
 }
 
 
-
-float Vector2::Distance(Vector2 othervector) 
+//returns fDistance from this point to target
+float Vector2::Distance(Vector2 othervector)
 {
-	float a, b, c;
+#pragma region Old Code
+	//float a, b, c;
 
-	a = (x - othervector.x);
+	//a = (x - othervector.x);
 
-	b = (y - othervector.y);
+	//b = (y - othervector.y);
 
-	a *= a; //a^2
-	b *= b; //b^2
+	//a *= a; //a^2
+	//b *= b; //b^2
 
-	c = a + b; // c^2 = a^2 + b^2
+	//c = a + b; // c^2 = a^2 + b^2
 
-	return sqrtf(c); //square root to get result
+	//return sqrtf(c); //square root to get result
+#pragma endregion
+
+	return Distance(*this, othervector);
 }
 
+//returns fDistance from a to b - Pythagoras Theorem 
 float Vector2::Distance(Vector2 v1, Vector2 v2)
 {
 	float a, b, c;
@@ -81,6 +86,24 @@ float Vector2::Distance(Vector2 v1, Vector2 v2)
 	c = a + b; // c^2 = a^2 + b^2
 
 	return sqrtf(c); //square root to get result
+}
+
+Vector2 Vector2::RandomOutOfScreenVector()
+{
+	return Vector2();//TODO: fix
+}
+
+Vector2 Vector2::RandomDirection()
+{
+	Vector2 direction;
+	do
+	{		
+		//generate a number between -1 & +1
+		direction.x = (rand() % 2 + 1) - 1;
+		direction.y = (rand() % 2 + 1) - 1;
+
+	} while (!(direction.x == 0 && direction.y == 0)); //while the direction != zero
+	return Vector2();
 }
 
 

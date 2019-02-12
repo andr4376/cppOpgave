@@ -1,6 +1,7 @@
 #ifndef VECTOR_2
 #define VECTOR_2
 #include <math.h>
+#include <stdlib.h>
 
 //Predetermined directions
 #define VECTOR_ZERO Vector2(0,0)
@@ -32,6 +33,8 @@ struct Vector2
 	float Magnitude();
 	float Distance(Vector2 othervector);
 	static float Distance(Vector2 a, Vector2 b);
+	static Vector2 RandomOutOfScreenVector();
+	static Vector2 RandomDirection();
 
 };
 
