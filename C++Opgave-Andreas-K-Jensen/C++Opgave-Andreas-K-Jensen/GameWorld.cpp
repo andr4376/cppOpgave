@@ -1,6 +1,8 @@
 #include "Globals.h"
+#include "Asteroid.h"
 #include "GameWorld.h"
 #include "Player.h"
+
 #include "Time.h"
 #include<thread>
 #include<iostream>
@@ -139,7 +141,7 @@ void GameWorld::PlaceGameObjects()
 	gameObjects.push_back(go);
 	colliders.push_back(goC);
 
-	MovingEntity* mGo = new MovingEntity(Vector2(0.5, 0.5),DEFAULT_MOVING_ENTITY_SPEED);
+	Asteroid* mGo = new Asteroid(Vector2(-2, 0));
 	Collider* mGoC = new Collider(mGo);
 
 	gameObjects.push_back(mGo);

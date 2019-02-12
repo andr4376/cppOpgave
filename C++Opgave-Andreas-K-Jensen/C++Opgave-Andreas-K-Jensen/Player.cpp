@@ -24,9 +24,9 @@ Player::Player(Vector2 _pos, float _speed, float _size) : MovingEntity(_pos, _sp
 {
 	sprite = SOIL_load_OGL_texture(PLAYER_TEXTURE, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 
-
 	entityType = PLAYER;
 
+	health = PLAYER_BASE_HEALTH;
 
 }
 #pragma endregion
@@ -39,9 +39,7 @@ void Player::OnCollisionEnter(GameObject & goRef)
 {
 	DEBUG_LOG("player coll enter");
 
-	//TODO: take dmg if enemy
-
-	if (goRef.GetEntityType() == ENEMY)
+	if (goRef.GetEntityType() == ENEMY || goRef.GetEntityType() == ASTEROID)
 	{
 		TakeDamage();
 	}

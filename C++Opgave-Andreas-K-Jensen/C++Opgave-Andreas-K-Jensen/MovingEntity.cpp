@@ -21,7 +21,7 @@ MovingEntity::MovingEntity(Vector2 _pos, float _speed, float _size) : GameObject
 {
 	speed = _speed;
 
-	entityType = OBSTACLE;
+	entityType = ASTEROID;
 
 }
 

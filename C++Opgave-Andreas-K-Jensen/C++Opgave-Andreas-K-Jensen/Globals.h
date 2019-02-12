@@ -23,6 +23,7 @@
 //Player
 #define PLAYER_SPEED 1
 #define PLAYER_SIZE 10
+#define PLAYER_BASE_HEALTH  3
 
 //Objects in general
 #define DEFAULT_OBJECT_SIZE 15
@@ -33,6 +34,8 @@
 //Asteroids
 #define ASTEROID_MIN_SIZE 5
 #define ASTEROID_MAX_SIZE 30
+#define ASTEROID_SPEED_MODIFER 5
+#define ASTEROID_HEALTH_MODIFER 10
 
 
 

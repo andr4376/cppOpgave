@@ -97,13 +97,17 @@ Vector2 Vector2::RandomDirection()
 {
 	Vector2 direction;
 	do
-	{		
+	{
+		//TODO: make it not based on time?? can cause slow start
 		//generate a number between -1 & +1
-		direction.x = (rand() % 2 + 1) - 1;
-		direction.y = (rand() % 2 + 1) - 1;
+		srand(time(NULL));
+		(direction.x = (rand() % (2 + 1))) - 1;
 
-	} while (!(direction.x == 0 && direction.y == 0)); //while the direction != zero
-	return Vector2();
+		srand(time(NULL));
+		(direction.y = (rand() % (2 + 1))) - 1;
+
+	} while (!(direction.x != 0 && direction.y != 0)); //while the direction != zero
+	return direction;
 }
 
 

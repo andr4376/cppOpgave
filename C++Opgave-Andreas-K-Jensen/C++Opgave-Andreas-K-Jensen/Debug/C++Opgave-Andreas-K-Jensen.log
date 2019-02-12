@@ -1,22 +1,18 @@
 ﻿  Asteroid.cpp
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(32): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  Circle.cpp
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(59): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(61): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Collider.cpp
   GameObject.cpp
   GameWorld.cpp
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\gameworld.cpp(142): warning C4305: 'argument': truncation from 'double' to 'float'
   Globals.cpp
   KillAble.cpp
-  main.cpp
   MovingEntity.cpp
 d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\movingentity.cpp(7): warning C4305: 'argument': truncation from 'double' to 'float'
 d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\movingentity.cpp(12): warning C4305: 'argument': truncation from 'double' to 'float'
   Player.cpp
   Time.cpp
-  Vector2.cpp
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(40): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(102): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(103): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  main.cpp
   Generating Code...
   soil.lib(SOIL.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification

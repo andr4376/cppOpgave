@@ -6,6 +6,8 @@
 #include "KillAble.h"
 
 //The player controlled objects - Inherites from MovingEntity AND Killable
+
+
 class Player :
 	public MovingEntity,
 	public KillAble

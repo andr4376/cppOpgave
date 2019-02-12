@@ -1,4 +1,4 @@
-#ifndef  KILLABLE_H
+#ifndef KILLABLE_H
 #define KILLABLE_H
 
 #include"GameWorld.h"
@@ -18,5 +18,5 @@ public:
 
 
 };
-
 #endif // ! KILLABLE_H
+

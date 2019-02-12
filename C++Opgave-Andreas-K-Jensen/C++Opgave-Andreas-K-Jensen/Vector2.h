@@ -2,6 +2,7 @@
 #define VECTOR_2
 #include <math.h>
 #include <stdlib.h>
+#include <chrono>
 
 //Predetermined directions
 #define VECTOR_ZERO Vector2(0,0)

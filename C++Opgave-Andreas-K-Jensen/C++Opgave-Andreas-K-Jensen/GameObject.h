@@ -7,7 +7,7 @@
 #include<iostream>
 
 //The different entity types the game has
-enum ENTITY_TYPE { BLANK, OBSTACLE, ENEMY, PLAYER, PROJECTILE};
+enum ENTITY_TYPE { BLANK, ASTEROID, ENEMY, PLAYER, PROJECTILE};
 
 class GameObject
 {
