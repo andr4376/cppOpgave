@@ -95,25 +95,33 @@ void Player::HandleInput()
 {
 	movementInput = false;
 
-	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_LEFT) == GLFW_PRESS)
+	//LEFT / A
+	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_LEFT) == GLFW_PRESS
+		|| glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_A) == GLFW_PRESS)
 	{
 		direction += VECTOR_LEFT;
 		movementInput = true;
 	}
-	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS)
+	//RIGHT /D
+	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS
+		|| glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_D) == GLFW_PRESS)
 	{
 		direction += VECTOR_RIGHT;
 		movementInput = true;
 
 	}
-	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_UP) == GLFW_PRESS)
+	//UP / W
+	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_UP) == GLFW_PRESS
+		|| glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_W) == GLFW_PRESS)
 	{
 		direction += VECTOR_UP;
 		movementInput = true;
 
 
 	}
-	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_DOWN) == GLFW_PRESS)
+	//DOWN/S
+	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_DOWN) == GLFW_PRESS
+		|| glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_S) == GLFW_PRESS)
 	{
 		direction += VECTOR_DOWN;
 		movementInput = true;
@@ -121,11 +129,11 @@ void Player::HandleInput()
 
 }
 
-//Overrides Moving entities Move()
+//Overrides Moving entities Move() -> doesn't call MovingEntity::Move() because player needs to control whether or not its direction is normalized
 void Player::Move()
 {
 	if (movementInput || direction.Magnitude() > 1) //if player has pressed a movement button, or the direction magnitude >1
-		direction.Normalize(); //Make sure the direction's magnitude remains 1 
+		direction.Normalize(); //Make sure the direction's magnitude remains 1 - to stop player from moving faster
 	//if no movement input - don't normalize (creates floating effect)
 
 
@@ -134,4 +142,51 @@ void Player::Move()
 
 	//Move the players position
 	this->position += (direction * speed) * Time::GetDeltaTime();
+}
+
+void Player::Die()
+{
+
+
+	GameWorld::GetInstanceRef().gameObjectsToRemove.push_back(this);
+
+	Collider* myColPtr = nullptr;
+
+	for (Collider* colPtr : GameWorld::GetInstanceRef().colliders)
+	{
+		if (colPtr->GetGameObject() == this)
+		{
+			colPtr = myColPtr;
+			break;
+		}
+	}
+
+	GameWorld::GetInstanceRef().collidersToRemove.push_back(myColPtr);
+
+	DEBUG_LOG("Player is dead");
+}
+
+void Player::Render()
+{
+	MovingEntity::Render();
+	DrawHealth();
+}
+
+void Player::DrawHealth()
+{
+	//TODO: visualize playe rhealth
+	float widht = 0.33 * health;
+
+	glPushMatrix(); //Lægger en matrise på stakken, således kun denne manipuleres
+	glBindTexture(GL_TEXTURE_2D, sprite); //Binder teksturen (Anvender til ved rendering af vertices)
+	glBegin(GL_QUADS);
+	// Front Face
+
+
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.95, -0.95, 0); //bottom left
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1 + widht, -0.95, 0); //bottom right
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1 + widht, -0.9, 0); //top right
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.95, -0.9, 0); //top left
+	glEnd();
+	glPopMatrix(); // Fjerner matrisen på stakken (dvs. nulstiller til udgangspunkt)
 }

@@ -3,6 +3,11 @@
 
 
 
+GameObject* Collider::GetGameObject()
+{
+	return gameObject;
+}
+
 Circle Collider::GetCollisionBox()
 {
 	return Circle(gameObject->GetPosition(), gameObject->GetSize() / 100);

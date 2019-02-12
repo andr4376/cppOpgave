@@ -1,18 +1,31 @@
-﻿  Circle.cpp
+﻿  Asteroid.cpp
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(52): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\asteroid.cpp(54): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Circle.cpp
   Collider.cpp
   GameObject.cpp
   GameWorld.cpp
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\gameworld.cpp(161): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\gameworld.cpp(167): warning C4305: 'argument': truncation from 'double' to 'float'
   Globals.cpp
   KillAble.cpp
   main.cpp
   MovingEntity.cpp
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\movingentity.cpp(7): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\movingentity.cpp(12): warning C4305: 'argument': truncation from 'double' to 'float'
   Player.cpp
   Time.cpp
   Vector2.cpp
-d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(40): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(103): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(104): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(104): warning C4552: '-': result of expression not used
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(106): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(107): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\code projects\c++\opgave\cppopgave\c++opgave-andreas-k-jensen\c++opgave-andreas-k-jensen\vector2.cpp(107): warning C4552: '-': result of expression not used
   Generating code
-  132 of 339 functions (38.9%) were compiled, the rest were copied from previous compilation.
-    95 functions were new in current compilation
-    7 functions had inline decision re-evaluated but remain unchanged
+  101 of 392 functions (25.8%) were compiled, the rest were copied from previous compilation.
+    49 functions were new in current compilation
+    39 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   C++Opgave-Andreas-K-Jensen.vcxproj -> D:\Code projects\C++\Opgave\cppOpgave\C++Opgave-Andreas-K-Jensen\Release\C++Opgave-Andreas-K-Jensen.exe

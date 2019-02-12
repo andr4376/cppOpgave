@@ -16,8 +16,10 @@ private:
 	//(vector fordi jeg gerne ønsker at kunne fjerne et specefikt element. Jeg ved ikke hvor mange spil objekter,
 	//så array er ikke muligt) - note: vector bruger dog meget energi på at resize sig selv, hver gang et element tilføkes.
 
-	std::vector<GameObject*> gameObjects; //Containter of all gameobjects 	
-	std::vector<Collider*> colliders;
+
+
+
+
 
 	GameWorld(); //private because Singleton
 	~GameWorld(); //destructor - deletes all gameobject ptrs and sets them too null 
@@ -30,9 +32,23 @@ private:
 	void SetupWindow();
 	void PlaceGameObjects();
 
+	void AddGameobjects();
+	void RemoveGameObjects();
+
+	void AddColliders();
+	void RemoveColliders();
+
 
 public:
 
+	std::vector<GameObject*> gameObjects; //Containter of all gameobjects 	
+	std::vector<Collider*> colliders;
+
+	std::vector<GameObject*> gameObjectsToAdd; //Containter of gameobjects to add
+	std::vector<GameObject*> gameObjectsToRemove; //Containter of gameobjects to remove
+
+	std::vector<Collider*> collidersToAdd;
+	std::vector<Collider*> collidersToRemove;
 
 	void GameLoop(); //calls update and render in a loop
 	static GameWorld& GetInstanceRef(); //returns a reference of the static singleton instance

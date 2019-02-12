@@ -23,6 +23,7 @@ MovingEntity::MovingEntity(Vector2 _pos, float _speed, float _size) : GameObject
 
 	entityType = ASTEROID;
 
+	rotation = 0;
 }
 
 MovingEntity::MovingEntity(float _speed) : MovingEntity()
@@ -40,6 +41,8 @@ Vector2  MovingEntity::GetDirection()
 {
 	return direction;
 }
+
+
 
 void MovingEntity::StayInScreen()
 {

@@ -7,24 +7,28 @@
 #include<iostream>
 
 //The different entity types the game has
-enum ENTITY_TYPE { BLANK, ASTEROID, ENEMY, PLAYER, PROJECTILE};
+enum ENTITY_TYPE { BLANK, ASTEROID, ENEMY, PLAYER, PROJECTILE };
 
 class GameObject
 {
 
 protected:
+	float rotation;
 	Vector2 position; //it's position in a 2d space
 	float size = 1;
 	GLuint sprite = NULL; //texture of game object
 	ENTITY_TYPE entityType;
+
 
 public:
 
 	GameObject(); //constructor
 	GameObject(Vector2 _pos); //constructor with position
 	GameObject(Vector2 _pos, float _size); //constructor with position and size
+	GameObject(Vector2 _pos, float _size, float rotation);//rotation
 	~GameObject();//destructor
 
+	void SetRotation(float _value);
 	float GetSize();
 	Vector2 GetPosition(); //returns position
 	ENTITY_TYPE GetEntityType(); //returns position

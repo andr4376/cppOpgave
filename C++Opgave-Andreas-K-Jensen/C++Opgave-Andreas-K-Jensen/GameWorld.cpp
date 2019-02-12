@@ -48,13 +48,17 @@ void GameWorld::GameLoop()
 	{
 		Time::Start(); //Start timer, to measure update timespan
 
+		AddGameobjects(); //add all gameobjects that are waiting to be added
+
 		GameLogic(); //update game 
 		Render(); //draw game
 
 		glfwPollEvents();
 
-		//std::this_thread::sleep_for(std::chrono::milliseconds(64)); //fps
 
+		RemoveGameObjects(); //remove all gameobjects that are waiting to be removed
+
+		//std::this_thread::sleep_for(std::chrono::milliseconds(64)); //fps
 		Time::Stop(); // stops timer, saves elapsed time (deltatime)
 	}
 	DEBUG_LOG("Exiting Game Loop");
@@ -141,16 +145,94 @@ void GameWorld::PlaceGameObjects()
 	gameObjects.push_back(go);
 	colliders.push_back(goC);
 
-	Asteroid* mGo = new Asteroid(Vector2(-2, 0));
+	/*Asteroid* mGo = new Asteroid(Vector2(-2, 0));
+	Collider* mGoC = new Collider(mGo);
+
+	gameObjects.push_back(mGo);
+	colliders.push_back(mGoC);*/
+
+	//asteroids
+	Asteroid* mGo = new Asteroid(Vector2(-1, 0), ASTEROID_MAX_SIZE, VECTOR_DOWN + VECTOR_RIGHT);
 	Collider* mGoC = new Collider(mGo);
 
 	gameObjects.push_back(mGo);
 	colliders.push_back(mGoC);
 
-	Player* d = new Player(VECTOR_LEFT, PLAYER_SPEED);
+	Asteroid* mGo2 = new Asteroid(Vector2(0, 0), ASTEROID_MIN_SIZE, Vector2(-0.6, 0.33));
+	Collider* mGoC2 = new Collider(mGo2);
+
+	gameObjects.push_back(mGo2);
+	colliders.push_back(mGoC2);
+
+	Asteroid* mGo3 = new Asteroid(VECTOR_UP, 15, Vector2(-0.3, 0.33));
+	Collider* mGoC3 = new Collider(mGo2);
+
+	gameObjects.push_back(mGo3);
+	colliders.push_back(mGoC3);
+	//
+
+	//player
+	Player* d = new Player(VECTOR_DOWN + VECTOR_RIGHT, PLAYER_SPEED);
 	Collider* dC = new Collider(d);
 	gameObjects.push_back(d);
 	colliders.push_back(dC);
+}
+
+void GameWorld::AddGameobjects()
+{
+	if (gameObjectsToAdd.size() > 0)
+	{
+
+		for (GameObject* goPtr : gameObjectsToAdd)
+		{
+			gameObjects.push_back(goPtr);
+		}
+
+		gameObjectsToAdd.clear();
+
+	}
+
+	AddColliders();
+}
+
+void GameWorld::RemoveGameObjects()
+{
+	RemoveColliders();
+	for (GameObject* go : gameObjectsToRemove)
+	{
+		gameObjects.erase(std::remove(gameObjects.begin(), gameObjects.end(), go), gameObjects.end());
+
+		delete go;
+		go = nullptr;
+	}
+	gameObjectsToRemove.clear();
+
+}
+
+void GameWorld::AddColliders()
+{
+	if (collidersToAdd.size() > 0)
+	{
+
+		for (Collider* collPtr : collidersToAdd)
+		{
+			colliders.push_back(collPtr);
+		}
+
+		collidersToAdd.clear();
+	}
+}
+
+void GameWorld::RemoveColliders()
+{
+	for (Collider* collPtr : collidersToRemove)
+	{
+		colliders.erase(std::remove(colliders.begin(), colliders.end(), collPtr), colliders.end());
+
+		delete collPtr;
+		collPtr = nullptr;
+	}
+	collidersToRemove.clear();
 }
 
 GameWorld& GameWorld::GetInstanceRef()

@@ -22,6 +22,9 @@ void KillAble::TakeDamage()
 void KillAble::Die()
 {
 	//TODO: remove game obejct and all pointers!!
+
+	//GameWorld::GetInstanceRef().gameObjectsToRemove.push_back(this);
+
 }
 
 int KillAble::GetHealth()

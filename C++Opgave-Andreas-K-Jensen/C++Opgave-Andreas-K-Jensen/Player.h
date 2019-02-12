@@ -32,6 +32,9 @@ private:
 	void DampenMovement(); //slows player down to make floating effect
 	void HandleInput(); //Handles input
 	void Move(); //Overrides MovingEntity's move - this one adds the floating effect
+	void Die();
+	void Render(); // overrides MovingEntities draw
+	void DrawHealth();
 
 protected:
 	void StayInScreen(); //makes sure player remains on screen when he attempts to move

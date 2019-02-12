@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 
+
 class Collider
 {
 
@@ -17,6 +18,7 @@ public:
 	Collider(GameObject* _gameObject);
 	~Collider();
 
+	GameObject* GetGameObject();
 	Circle GetCollisionBox();
 	void CheckCollision();
 };

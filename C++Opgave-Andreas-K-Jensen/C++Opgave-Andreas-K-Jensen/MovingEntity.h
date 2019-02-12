@@ -22,7 +22,6 @@ protected:
 	Vector2 direction;
 	float speed;
 	virtual void StayInScreen(); //makes sure player remains on screen when he attempts to move
-
 	virtual void Move();
 private:
 
