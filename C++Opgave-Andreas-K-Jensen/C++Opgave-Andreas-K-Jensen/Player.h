@@ -37,7 +37,7 @@ private:
 	void Die();
 	void Render(); // overrides MovingEntities draw
 	void DrawHealth();
-
+	float GetBlueAndGreenColorIntensity(); //for visual effect when low health
 protected:
 	void StayInScreen(); //makes sure player remains on screen when he attempts to move
 };

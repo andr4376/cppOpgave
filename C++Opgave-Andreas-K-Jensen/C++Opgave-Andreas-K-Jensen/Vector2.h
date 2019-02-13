@@ -25,15 +25,20 @@ struct Vector2
 
 	//Allows adding vectors together 
 	Vector2 operator + (Vector2 otherVector); //operator overload
+	Vector2 operator - (Vector2 otherVector); //operator overload
+
 	void operator += (Vector2 otherVector); //adds another vector on this vector
 	Vector2 operator * (float multiplication);
 	void operator *= (float multiplication);
+	bool operator == (Vector2 other);
 
 
 	void Normalize();
 	float Magnitude();
 	float Distance(Vector2 othervector);
 	static float Distance(Vector2 a, Vector2 b);
+	Vector2 DirectionTowardsTarget(Vector2 other);
+	Vector2 DirectionAwayFromTarget(Vector2 other);
 	static Vector2 RandomOutOfScreenVector();
 	static Vector2 RandomDirection();
 

@@ -72,6 +72,25 @@ void MovingEntity::Move()
 
 }
 
+void MovingEntity::OnCollisionStay(GameObject & goRef)
+{
+	if (size <= goRef.GetSize())
+	{
+
+		
+
+		
+			direction = position.DirectionAwayFromTarget(goRef.GetPosition());
+		
+			direction.Normalize();
+	}
+
+}
+
+void MovingEntity::OnCollisionExit(GameObject & goRef)
+{
+}
+
 void MovingEntity::Update()
 {
 	Move();

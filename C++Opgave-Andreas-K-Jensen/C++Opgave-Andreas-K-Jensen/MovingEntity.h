@@ -23,6 +23,9 @@ protected:
 	float speed;
 	virtual void StayInScreen(); //makes sure player remains on screen when he attempts to move
 	virtual void Move();
+
+	 void OnCollisionStay(GameObject& goRef);
+	 void OnCollisionExit(GameObject& goRef);
 private:
 
 };

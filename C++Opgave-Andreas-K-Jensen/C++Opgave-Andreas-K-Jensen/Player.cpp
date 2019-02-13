@@ -179,15 +179,27 @@ void Player::DrawHealth()
 {
 	float healthBarWidht = 0.33 * health; //widht of the healbar
 
-	glPushMatrix(); 
-	glBindTexture(GL_TEXTURE_2D, healthBarSprite); 
+	glPushMatrix();
+	glBindTexture(GL_TEXTURE_2D, healthBarSprite);
 
-	glBegin(GL_QUADS);	
+	glColor3f(1, 0, 0);
+
+	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.95, -0.95, 0); //bottom left
 	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.2 + healthBarWidht, -0.95, 0); //bottom right
 	glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.2 + healthBarWidht, -0.9, 0); //top right
 	glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.95, -0.9, 0); //top left
 	glEnd();
 
-	glPopMatrix(); 
+	glColor3f(1, GetBlueAndGreenColorIntensity(), GetBlueAndGreenColorIntensity());
+
+	//make green and blue % of what health is remaining
+
+	glPopMatrix();
+}
+
+float Player::GetBlueAndGreenColorIntensity()
+{
+	float f =(float)health / PLAYER_BASE_HEALTH;
+	return f;
 }

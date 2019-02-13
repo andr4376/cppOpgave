@@ -226,6 +226,13 @@ void GameWorld::AddColliders()
 
 void GameWorld::RemoveColliders()
 {
+	//if there are no colliders to be removed
+	if (collidersToRemove.size() == 0)
+	{
+		//exit method
+		return;
+	}
+
 	for (Collider* collToRemove : collidersToRemove) //for each collider we want to remove
 	{
 		//remove it from gw's collider list
@@ -235,11 +242,11 @@ void GameWorld::RemoveColliders()
 		//for each collider in gw's collider
 		for (Collider* collider : instancePtr->colliders)
 		{
-			//for each of known collider in that collider
-			for (Collider* colliderCollider : collider->otherColliders)
+			//for each of known collider in the abovementioned collider
+			for (Collider* collidersCollider : collider->otherColliders)
 			{
 				//if that collider is the one we're removing
-				if (colliderCollider == collToRemove)
+				if (collidersCollider == collToRemove)
 				{
 					//remove it from that colliders "other colliders"
 					collider->otherColliders.erase(std::remove(collider->otherColliders.begin(),
@@ -269,11 +276,7 @@ GameWorld& GameWorld::GetInstanceRef()
 GLFWwindow & GameWorld::GetWindow()
 {
 	//the window reference = the value of the window pointer, stored on the singleton instance 
-	GLFWwindow& win = *instancePtr->windowPtr;
-
-	return win;
-
-
+	return *instancePtr->windowPtr;
 }
 
 std::vector<Collider*>& GameWorld::GetColliders()

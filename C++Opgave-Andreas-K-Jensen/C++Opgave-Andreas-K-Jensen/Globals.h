@@ -11,7 +11,7 @@
 
 //game window settings
 #define SCREEN_WIDHT 800
-#define SCREEN_HEIGHT 800
+#define SCREEN_HEIGHT 700
 
 
 #define LEFT_GAME_BORDER -1
@@ -23,7 +23,7 @@
 //Player
 #define PLAYER_SPEED 1
 #define PLAYER_SIZE 10
-#define PLAYER_BASE_HEALTH  3
+#define PLAYER_BASE_HEALTH  6
 #define PLAYER_MOVEMENT_DAMPENING -2
 
 

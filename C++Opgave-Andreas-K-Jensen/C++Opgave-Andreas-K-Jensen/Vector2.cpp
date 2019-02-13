@@ -18,6 +18,11 @@ Vector2 Vector2::operator+(Vector2 otherVector)
 	return Vector2(x + otherVector.x, y + otherVector.y);
 }
 
+Vector2 Vector2::operator-(Vector2 otherVector)
+{
+	return Vector2();
+}
+
 void Vector2::operator+=(Vector2 otherVector)
 {
 	x += otherVector.x;
@@ -35,10 +40,9 @@ void Vector2::operator*=(float multiplication)
 	y *= multiplication;
 }
 
-float Vector2::Magnitude()
-{
-	return sqrt(x*x + y * y);
-}
+bool Vector2::operator==(Vector2 other) { return (this->x == other.x && this->y == other.y); }
+
+float Vector2::Magnitude() { return sqrt(x*x + y * y); }
 
 void Vector2::Normalize()
 {
@@ -87,6 +91,10 @@ float Vector2::Distance(Vector2 v1, Vector2 v2)
 
 	return sqrtf(c); //square root to get result
 }
+
+Vector2 Vector2::DirectionTowardsTarget(Vector2 other) { return Vector2(other.x - this->x, other.y - this->y); }
+
+Vector2 Vector2::DirectionAwayFromTarget(Vector2 other) { return Vector2(this->x - other.x, this->y - other.y); }
 
 Vector2 Vector2::RandomOutOfScreenVector()
 {
