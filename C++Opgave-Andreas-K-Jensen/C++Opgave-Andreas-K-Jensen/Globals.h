@@ -21,7 +21,7 @@
 
 //game settings
 
-#define SPAWN_OBJECTS_COOLDOWN 10
+#define SPAWN_OBJECTS_COOLDOWN 3
 
 
 //Player
@@ -41,7 +41,7 @@
 #define ASTEROID_MIN_SIZE 5
 #define ASTEROID_MAX_SIZE 30
 #define ASTEROID_SPEED_MODIFER 5
-#define ASTEROID_HEALTH_MODIFER 10
+#define ASTEROID_HEALTH_MODIFER 5 //lower is higher
 #define ASTEROID_ROTATION_SPEED 200
 
 

@@ -21,8 +21,9 @@ public:
 	static float GenerateSize();
 private:
 	void Die();
+	void SplitIntoTwo();
 	void Move();
-
+	void OnCollisionEnter(GameObject& goRef);//
 };
 
 

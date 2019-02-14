@@ -13,7 +13,10 @@ class Collider
 private:
 	GameObject* gameObject;
 
-	void RemoveKnownColliders();
+	void RemoveIrrelevantColliders();
+	void CheckCollisionEnter();
+	void CheckCollisionStayAndEnter();
+
 public:
 	Collider(GameObject* _gameObject);
 	~Collider();

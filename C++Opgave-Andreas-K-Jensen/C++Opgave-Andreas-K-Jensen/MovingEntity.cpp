@@ -74,12 +74,10 @@ void MovingEntity::Move()
 
 void MovingEntity::OnCollisionStay(GameObject & goRef)
 {
+	//If this one is smaller that the other
 	if (size <= goRef.GetSize())
-	{
-
-		
-
-		
+	{					
+		//this one should move away
 			direction = position.DirectionAwayFromTarget(goRef.GetPosition());
 		
 			direction.Normalize();
@@ -98,7 +96,6 @@ void MovingEntity::Update()
 
 void MovingEntity::OnCollisionEnter(GameObject & goRef)
 {
-	DEBUG_LOG("moving entity coll enter");
 
 	GameObject::OnCollisionEnter(goRef);
 }
