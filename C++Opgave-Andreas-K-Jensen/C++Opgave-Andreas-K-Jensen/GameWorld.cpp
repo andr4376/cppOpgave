@@ -44,6 +44,8 @@ void GameWorld::GameLoop()
 {
 	DEBUG_LOG("Entering Game Loop");
 
+	Time::SetStartTime();
+
 	while (!glfwWindowShouldClose(windowPtr)) // Køre så længe glfw vinduet ikke har fået besked på at lukke (f.eks. tryk på X knappen)
 	{
 		Time::Start(); //Start timer, to measure update timespan

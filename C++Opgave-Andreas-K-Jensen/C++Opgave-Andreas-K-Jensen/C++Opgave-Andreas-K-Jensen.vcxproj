@@ -136,6 +136,7 @@
     <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
@@ -150,6 +151,7 @@
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="Spawner.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>

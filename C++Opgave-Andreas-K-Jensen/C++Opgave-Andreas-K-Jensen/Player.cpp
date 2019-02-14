@@ -53,6 +53,12 @@ void Player::OnCollisionEnter(GameObject & goRef)
 
 void Player::Update()
 {
+	if (invincible)
+	{
+		//checks if player should remain invincible
+		//(player becomes invincible for a duration after getting hit)
+		CanTakeDamage();
+	}
 
 	DampenMovement(); //dampens movement. If no movementkeys are pressed, it will float
 
@@ -171,6 +177,9 @@ void Player::Die()
 
 void Player::Render()
 {
+	//Draw Player Cyan
+	if (invincible) { glColor3f(0, 1, 1); }
+
 	MovingEntity::Render();
 	DrawHealth();
 }
@@ -183,6 +192,10 @@ void Player::DrawHealth()
 	glBindTexture(GL_TEXTURE_2D, healthBarSprite);
 
 	glColor3f(1, 0, 0);
+
+	//Draw Player Cyan
+
+	if (invincible) { glColor3f(0, 1, 1); }
 
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.95, -0.95, 0); //bottom left
@@ -200,6 +213,42 @@ void Player::DrawHealth()
 
 float Player::GetBlueAndGreenColorIntensity()
 {
-	float f =(float)health / PLAYER_BASE_HEALTH;
-	return f;
+	float intensity = (float)health / PLAYER_BASE_HEALTH;
+	return intensity;
+}
+
+bool Player::CanTakeDamage()
+{
+	if (invincible) // if player is currently invincible
+	{
+		//get elapsed time since hit
+		fSecond elapsedTime = Clock::now() - takeDamageTimeStamp;
+
+		//if it exceeds the cooldown
+		if (elapsedTime.count() >= PLAYER_INVINCIBILITY_TIME_SECONDS)
+		{
+			//player can get hit
+			invincible = false;
+			return true;
+		}
+		//else he cannot
+		return false;
+	}
+
+	//if not invincible
+	return true;
+}
+
+void Player::TakeDamage()
+{
+
+	if (CanTakeDamage())
+	{
+		KillAble::TakeDamage();
+
+		takeDamageTimeStamp = Clock::now();
+
+		invincible = true;
+	}
+
 }

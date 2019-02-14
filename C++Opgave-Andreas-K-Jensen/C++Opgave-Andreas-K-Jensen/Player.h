@@ -17,6 +17,8 @@ private:
 	bool movementInput; //If no input, allows player to float
 	float movementDampeningFactor; //floating intensity when no input
 	GLuint healthBarSprite = NULL; //texture of game object
+	TimePoint takeDamageTimeStamp = Clock::now();
+	bool invincible = false;
 
 public:
 
@@ -38,6 +40,8 @@ private:
 	void Render(); // overrides MovingEntities draw
 	void DrawHealth();
 	float GetBlueAndGreenColorIntensity(); //for visual effect when low health
+	bool CanTakeDamage();
+	void TakeDamage();
 protected:
 	void StayInScreen(); //makes sure player remains on screen when he attempts to move
 };

@@ -3,8 +3,10 @@
 
 static float deltaTime;
 
-static auto start = std::chrono::high_resolution_clock::now();
-static auto stop = std::chrono::high_resolution_clock::now();
+static TimePoint gameStartTime = Clock::now();
+
+static TimePoint start = Clock::now();
+static TimePoint stop = Clock::now();
 
 
 
@@ -16,22 +18,39 @@ float Time::GetDeltaTime()
 
 void Time::Start()
 {
-	start = std::chrono::high_resolution_clock::now();
+	start = Clock::now();
 
 }
 
+//Stops the timer, and sets deltatime (elapsed time this update)
 void Time::Stop()
 {
-	stop = std::chrono::high_resolution_clock::now();
+	stop = Clock::now();
 
-	std::chrono::duration<float> elapsed = stop - start;
+	fSecond elapsed = stop - start;
 
 	deltaTime = elapsed.count();
 
-	
+
+}
+
+//sets start time for when we entered the game loop
+void Time::SetStartTime()
+{
+	gameStartTime = Clock::now();
+}
+
+//returns the amoun of time (f) since we entered the game loop
+float Time::GetTotalGameTime()
+{
+
+	fSecond elapsed = Clock::now() - gameStartTime;
+
+	return elapsed.count();
 }
 
 Time::~Time()
 {
+
 }
 
