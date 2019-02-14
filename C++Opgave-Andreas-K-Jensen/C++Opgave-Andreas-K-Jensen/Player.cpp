@@ -191,10 +191,10 @@ void Player::DrawHealth()
 	glPushMatrix();
 	glBindTexture(GL_TEXTURE_2D, healthBarSprite);
 
+	//red
 	glColor3f(1, 0, 0);
 
-	//Draw Player Cyan
-
+	//Draw healthbar Cyan
 	if (invincible) { glColor3f(0, 1, 1); }
 
 	glBegin(GL_QUADS);
@@ -204,9 +204,10 @@ void Player::DrawHealth()
 	glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.95, -0.9, 0); //top left
 	glEnd();
 
+	//make green and blue % of what health is remaining
+	//The less health, the more red
 	glColor3f(1, GetBlueAndGreenColorIntensity(), GetBlueAndGreenColorIntensity());
 
-	//make green and blue % of what health is remaining
 
 	glPopMatrix();
 }

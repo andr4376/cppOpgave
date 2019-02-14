@@ -39,7 +39,7 @@ struct Vector2
 	static float Distance(Vector2 a, Vector2 b);
 	Vector2 DirectionTowardsTarget(Vector2 other);
 	Vector2 DirectionAwayFromTarget(Vector2 other);
-	static Vector2 RandomOutOfScreenVector();
+	static Vector2 RandomOutOfScreenPosition();
 	static Vector2 RandomDirection();
 
 };

@@ -1,25 +1,20 @@
 #ifndef GAMEWORLD_H
 #define GAMEWORLD_H
-
-
-
 #include <GLFW\glfw3.h>
+#include "Spawner.h"
 #include "GameObject.h"
 #include <vector>
 #include "Collider.h"
+#include <stack>
+#include "Time.h" ////
 
 class Collider; //Defining the class, so the two classes can refer to each other (collider needs Gameworld Instance)
 
 class GameWorld
 {
 private:
-	//(vector fordi jeg gerne ønsker at kunne fjerne et specefikt element. Jeg ved ikke hvor mange spil objekter,
-	//så array er ikke muligt) - note: vector bruger dog meget energi på at resize sig selv, hver gang et element tilføkes.
 
-
-
-
-
+	TimePoint spawnedObjectsTimeStamp = Clock::now();
 
 	GameWorld(); //private because Singleton
 	~GameWorld(); //destructor - deletes all gameobject ptrs and sets them too null 
@@ -32,6 +27,8 @@ private:
 	void SetupWindow();
 	void PlaceGameObjects();
 
+	void SpawnObjectsOnInerval();
+
 	void AddGameobjects();
 	void RemoveGameObjects();
 
@@ -41,13 +38,15 @@ private:
 
 public:
 
+	//(vector fordi jeg gerne ønsker at kunne fjerne et specefikt element. Jeg ved ikke hvor mange spil objekter,
+	//så array er ikke muligt) - note: vector bruger dog meget energi på at resize sig selv, hver gang et element tilføkes.
 	std::vector<GameObject*> gameObjects; //Containter of all gameobjects 	
 	std::vector<Collider*> colliders;
 
-	std::vector<GameObject*> gameObjectsToAdd; //Containter of gameobjects to add
+	std::stack<GameObject*> gameObjectsToAdd; //stack of gameobjects to add
 	std::vector<GameObject*> gameObjectsToRemove; //Containter of gameobjects to remove
 
-	std::vector<Collider*> collidersToAdd;
+	std::stack<Collider*> collidersToAdd;
 	std::vector<Collider*> collidersToRemove;
 
 	void GameLoop(); //calls update and render in a loop

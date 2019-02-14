@@ -9,7 +9,6 @@ private:
 	float radius;
 public:
 	Circle(Vector2 center, float radius);
-	Circle();
 	~Circle();
 
 	bool ContainsPoint(Vector2 point);

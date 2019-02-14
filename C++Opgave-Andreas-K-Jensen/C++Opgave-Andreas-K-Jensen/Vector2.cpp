@@ -96,9 +96,20 @@ Vector2 Vector2::DirectionTowardsTarget(Vector2 other) { return Vector2(other.x 
 
 Vector2 Vector2::DirectionAwayFromTarget(Vector2 other) { return Vector2(this->x - other.x, this->y - other.y); }
 
-Vector2 Vector2::RandomOutOfScreenVector()
+Vector2 Vector2::RandomOutOfScreenPosition()
 {
-	return Vector2();//TODO: fix
+	Vector2 position;
+	do
+	{
+		//TODO: j
+		//generate a number between -1 & +1
+		position.x = (float)(((rand() % (600 + 1))) - 300) / 100;
+
+		position.y = (float)(((rand() % (600 + 1))) - 300) / 100;
+
+	} while (!((position.x <-1.5 || position.x > 1.5) &&
+		(position.y <-1.5 || position.y > 1.5))); //untill its guarenteed to be outside of the screen
+	return position;
 }
 
 Vector2 Vector2::RandomDirection()
@@ -106,13 +117,11 @@ Vector2 Vector2::RandomDirection()
 	Vector2 direction;
 	do
 	{
-		//TODO: make it not based on time?? can cause slow start
+		//TODO: j
 		//generate a number between -1 & +1
-		srand(time(NULL));
-		(direction.x = (rand() % (2 + 1))) - 1;
+		direction.x = (float)(((rand() % (200 + 1))) - 100) / 100;
 
-		srand(time(NULL));
-		(direction.y = (rand() % (2 + 1))) - 1;
+		direction.y = (float)(((rand() % (200 + 1))) - 100) / 100;
 
 	} while (!(direction.x != 0 && direction.y != 0)); //while the direction != zero
 	return direction;

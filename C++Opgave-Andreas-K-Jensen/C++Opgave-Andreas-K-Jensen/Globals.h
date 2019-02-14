@@ -20,6 +20,10 @@
 #define BOTTOM_GAME_BORDER -1
 
 //game settings
+
+#define SPAWN_OBJECTS_COOLDOWN 10
+
+
 //Player
 #define PLAYER_SPEED 1
 #define PLAYER_SIZE 10

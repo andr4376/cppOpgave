@@ -4,12 +4,13 @@
 #include "GameWorld.h"
 #include "GameObject.h"
 #include "Sound.h"
+#include "Time.h"
 #include "Vector2.h"
 
 
 int main()
 {
-	TEST_AUDIO
+//	TEST_AUDIO
 	glfwInit(); //Initialisering af glfw
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2); //Sætte øvre OpenGl version
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0); //Sætte nedre OpenGl Version

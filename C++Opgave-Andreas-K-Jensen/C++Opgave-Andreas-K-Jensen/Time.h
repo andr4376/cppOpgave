@@ -1,5 +1,5 @@
-#ifndef SOUND_H
-#define SOUND_H
+#ifndef TIME_H
+#define TIME_H
 
 #include <chrono>
 
@@ -21,4 +21,4 @@ public:
 	~Time();
 };
 
-#endif // !SOUND_H
+#endif // !TIME_H

@@ -2,11 +2,11 @@
 #include "Asteroid.h"
 #include "GameWorld.h"
 #include "Player.h"
-
+#include "Sound.h"
 #include "Time.h"
 #include<thread>
 #include<iostream>
-
+#include "Spawner.h"
 static GameWorld* instancePtr = nullptr;
 
 void size_resize_callback(GLFWwindow* window, int width, int height)
@@ -49,6 +49,8 @@ void GameWorld::GameLoop()
 	while (!glfwWindowShouldClose(windowPtr)) // Køre så længe glfw vinduet ikke har fået besked på at lukke (f.eks. tryk på X knappen)
 	{
 		Time::Start(); //Start timer, to measure update timespan
+
+		SpawnObjectsOnInerval();
 
 		AddGameobjects(); //add all gameobjects that are waiting to be added
 
@@ -154,7 +156,7 @@ void GameWorld::PlaceGameObjects()
 	//colliders.push_back(mGoC);
 
 	//asteroids
-	Asteroid* mGo = new Asteroid(Vector2(-1, 0), ASTEROID_MAX_SIZE, VECTOR_DOWN + VECTOR_RIGHT);
+	/*Asteroid* mGo = new Asteroid(Vector2(-1, 0), ASTEROID_MAX_SIZE, VECTOR_DOWN + VECTOR_RIGHT);
 	Collider* mGoC = new Collider(mGo);
 
 	gameObjects.push_back(mGo);
@@ -170,27 +172,38 @@ void GameWorld::PlaceGameObjects()
 	Collider* mGoC3 = new Collider(mGo3);
 
 	gameObjects.push_back(mGo3);
-	colliders.push_back(mGoC3);
+	colliders.push_back(mGoC3);*/
 	//
 
 	//player
-	Player* d = new Player(VECTOR_DOWN + VECTOR_RIGHT, PLAYER_SPEED);
+	Player* d = new Player(VECTOR_ZERO, PLAYER_SPEED);
 	Collider* dC = new Collider(d);
 	gameObjects.push_back(d);
 	colliders.push_back(dC);
 }
 
+void GameWorld::SpawnObjectsOnInerval()
+{
+	fSecond elapsedTime = Clock::now() - spawnedObjectsTimeStamp;
+
+	if (elapsedTime.count() >= SPAWN_OBJECTS_COOLDOWN)
+	{
+		Spawner::SpawnGameObject(ASTEROID);
+
+		spawnedObjectsTimeStamp = Clock::now();
+
+		TEST_AUDIO
+	}
+
+
+}
+
 void GameWorld::AddGameobjects()
 {
-	if (gameObjectsToAdd.size() > 0)
+	while (gameObjectsToAdd.size() > 0)
 	{
-
-		for (GameObject* goPtr : gameObjectsToAdd)
-		{
-			gameObjects.push_back(goPtr);
-		}
-
-		gameObjectsToAdd.clear();
+		gameObjects.push_back(gameObjectsToAdd.top());
+		gameObjectsToAdd.pop();
 
 	}
 
@@ -214,15 +227,11 @@ void GameWorld::RemoveGameObjects()
 
 void GameWorld::AddColliders()
 {
-	if (collidersToAdd.size() > 0)
+	while (collidersToAdd.size() > 0)
 	{
+		colliders.push_back(collidersToAdd.top());
+		collidersToAdd.pop();
 
-		for (Collider* collPtr : collidersToAdd)
-		{
-			colliders.push_back(collPtr);
-		}
-
-		collidersToAdd.clear();
 	}
 }
 

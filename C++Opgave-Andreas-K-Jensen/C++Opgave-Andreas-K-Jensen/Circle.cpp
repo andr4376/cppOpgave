@@ -11,9 +11,7 @@ Circle::Circle(Vector2 _center, float _radius)
 	radius = _radius;
 }
 
-Circle::Circle()
-{
-}
+
 
 Circle::~Circle()
 {
