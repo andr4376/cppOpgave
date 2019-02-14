@@ -4,6 +4,7 @@
 #include "MovingEntity.h"
 #include "Time.h"
 #include "KillAble.h"
+#include "Projectile.h"
 
 //The player controlled objects - Inherites from MovingEntity AND Killable
 
@@ -20,6 +21,7 @@ private:
 	TimePoint takeDamageTimeStamp = Clock::now();
 	bool invincible = false;
 
+	TimePoint shootTimeStamp = Clock::now();
 public:
 
 	void Update();
@@ -41,7 +43,12 @@ private:
 	void DrawHealth();
 	float GetBlueAndGreenColorIntensity(); //for visual effect when low health
 	bool CanTakeDamage();
+	bool CanShoot();
 	void TakeDamage();
+	void MovementInputHandler();
+	void ShootInputHandler();
+	void Shoot(Vector2 _direction);
+
 protected:
 	void StayInScreen(); //makes sure player remains on screen when he attempts to move
 };

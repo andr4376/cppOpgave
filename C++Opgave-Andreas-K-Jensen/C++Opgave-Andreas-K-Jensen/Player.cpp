@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "GameWorld.h"
 #include<iostream>
-
 #define PLAYER_TEXTURE "player.png"
 #define PLAYER_HEALTHBAR_TEXTURE "healthBar.png"
 
@@ -102,40 +101,8 @@ void Player::StayInScreen()
 
 void Player::HandleInput()
 {
-	movementInput = false;
-
-	//LEFT / A
-	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_LEFT) == GLFW_PRESS
-		|| glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_A) == GLFW_PRESS)
-	{
-		direction += VECTOR_LEFT;
-		movementInput = true;
-	}
-	//RIGHT /D
-	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS
-		|| glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_D) == GLFW_PRESS)
-	{
-		direction += VECTOR_RIGHT;
-		movementInput = true;
-
-	}
-	//UP / W
-	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_UP) == GLFW_PRESS
-		|| glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_W) == GLFW_PRESS)
-	{
-		direction += VECTOR_UP;
-		movementInput = true;
-
-
-	}
-	//DOWN/S
-	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_DOWN) == GLFW_PRESS
-		|| glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_S) == GLFW_PRESS)
-	{
-		direction += VECTOR_DOWN;
-		movementInput = true;
-	}
-
+	MovementInputHandler();
+	ShootInputHandler();
 }
 
 //Overrides Moving entities Move() -> doesn't call MovingEntity::Move() because player needs to control whether or not its direction is normalized
@@ -155,24 +122,7 @@ void Player::Move()
 
 void Player::Die()
 {
-
-
-	GameWorld::GetInstanceRef().gameObjectsToRemove.push_back(this);
-
-	Collider* myColPtr = nullptr;
-
-	for (Collider* colPtr : GameWorld::GetInstanceRef().colliders)
-	{
-		if (colPtr->GetGameObject() == this)
-		{
-			myColPtr = colPtr;
-			break;
-		}
-	}
-
-	GameWorld::GetInstanceRef().collidersToRemove.push_back(myColPtr);
-
-	DEBUG_LOG("Player is dead");
+	GameWorld::GetInstanceRef().DestroyGameObject(this);
 }
 
 void Player::Render()
@@ -240,6 +190,22 @@ bool Player::CanTakeDamage()
 	return true;
 }
 
+bool Player::CanShoot()
+{
+	//get elapsed time since last shot
+	fSecond elapsedTime = Clock::now() - shootTimeStamp;
+
+	//if it exceeds the cooldown
+	if (elapsedTime.count() >= PLAYER_SHOOT_COOLDOWN)
+	{
+		//player can shoot 		
+		return true;
+	}
+	//else he cannot
+	return false;
+
+}
+
 void Player::TakeDamage()
 {
 
@@ -252,4 +218,91 @@ void Player::TakeDamage()
 		invincible = true;
 	}
 
+}
+
+void Player::MovementInputHandler()
+{
+	movementInput = false;
+
+	// A
+	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_A) == GLFW_PRESS)
+	{
+		direction += VECTOR_LEFT;
+		movementInput = true;
+	}
+	//D
+	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_D) == GLFW_PRESS)
+	{
+		direction += VECTOR_RIGHT;
+		movementInput = true;
+
+	}
+	//W
+	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_W) == GLFW_PRESS)
+	{
+		direction += VECTOR_UP;
+		movementInput = true;
+
+
+	}
+	//S
+	if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_S) == GLFW_PRESS)
+	{
+		direction += VECTOR_DOWN;
+		movementInput = true;
+	}
+}
+
+void Player::ShootInputHandler()
+{
+	if (CanShoot())
+	{
+
+		bool shootInput = false;
+
+		Vector2 shootDirection = VECTOR_ZERO;
+		//LEFT
+		if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_LEFT) == GLFW_PRESS)
+		{
+			shootDirection += VECTOR_LEFT;
+			shootInput = true;
+		}
+		//RIGHT 
+		else if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS)
+		{
+			shootDirection += VECTOR_RIGHT;
+			shootInput = true;
+
+		}
+		//UP 
+		if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_UP) == GLFW_PRESS)
+		{
+			shootDirection += VECTOR_UP;
+			shootInput = true;
+
+
+		}
+		//DOWN
+		else if (glfwGetKey(&GameWorld::GetWindow(), GLFW_KEY_DOWN) == GLFW_PRESS)
+		{
+			shootDirection += VECTOR_DOWN;
+			shootInput = true;
+		}
+
+		if (shootInput)
+		{
+			shootDirection.Normalize();
+			Shoot(shootDirection);
+		}
+	}
+}
+
+void Player::Shoot(Vector2 _direction)
+{
+	Projectile* pProjectile = new Projectile(position, _direction, FRIENDLY_PROJECTILE);
+
+	GameWorld::GetInstanceRef().gameObjectsToAdd.push(pProjectile);
+	GameWorld::GetInstanceRef().collidersToAdd.push(new Collider(pProjectile));
+
+	shootTimeStamp = Clock::now();
 }

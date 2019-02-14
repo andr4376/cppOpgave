@@ -44,14 +44,17 @@ public:
 	std::vector<Collider*> colliders;
 
 	std::stack<GameObject*> gameObjectsToAdd; //stack of gameobjects to add
-	std::vector<GameObject*> gameObjectsToRemove; //Containter of gameobjects to remove
+	std::stack<GameObject*> gameObjectsToRemove; //Containter of gameobjects to remove
 
 	std::stack<Collider*> collidersToAdd;
-	std::vector<Collider*> collidersToRemove;
+	std::stack<Collider*> collidersToRemove;
 
 	void GameLoop(); //calls update and render in a loop
 	static GameWorld& GetInstanceRef(); //returns a reference of the static singleton instance
 	static GLFWwindow& GetWindow(); //returns a reference of the game window
+
+	 void DestroyGameObject(GameObject* goRef); //returns a reference of the game window
+
 	std::vector<Collider*>& GetColliders();
 
 

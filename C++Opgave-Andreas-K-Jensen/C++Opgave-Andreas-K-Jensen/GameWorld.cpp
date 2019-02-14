@@ -212,16 +212,20 @@ void GameWorld::AddGameobjects()
 
 void GameWorld::RemoveGameObjects()
 {
-	RemoveColliders();
-	for (GameObject* go : gameObjectsToRemove)
+
+	while (gameObjectsToRemove.size() > 0)
 	{
-		gameObjects.erase(std::remove(gameObjects.begin(), gameObjects.end(), go), gameObjects.end());
 
-		REMOVE_PTR(go);
+		//remove it from that colliders "other colliders"
+		gameObjects.erase(std::remove(gameObjects.begin(),
+			gameObjects.end(), gameObjectsToRemove.top()), gameObjects.end());
 
+		REMOVE_PTR(gameObjectsToRemove.top());
+
+		gameObjectsToRemove.pop();
 
 	}
-	gameObjectsToRemove.clear();
+	RemoveColliders();
 
 }
 
@@ -244,10 +248,11 @@ void GameWorld::RemoveColliders()
 		return;
 	}
 
-	for (Collider* collToRemove : collidersToRemove) //for each collider we want to remove
+	while (collidersToRemove.size() > 0)
 	{
+
 		//remove it from gw's collider list
-		colliders.erase(std::remove(colliders.begin(), colliders.end(), collToRemove), colliders.end());
+
 
 
 		//for each collider in gw's collider
@@ -257,19 +262,24 @@ void GameWorld::RemoveColliders()
 			for (Collider* collidersCollider : collider->otherColliders)
 			{
 				//if that collider is the one we're removing
-				if (collidersCollider == collToRemove)
+				if (collidersCollider == collidersToRemove.top())
 				{
 					//remove it from that colliders "other colliders"
 					collider->otherColliders.erase(std::remove(collider->otherColliders.begin(),
-						collider->otherColliders.end(), collToRemove), collider->otherColliders.end());
+						collider->otherColliders.end(), collidersToRemove.top()), collider->otherColliders.end());
 				}
 			}
 		}
-		//Delete ptr
-		REMOVE_PTR(collToRemove);
-	}
 
-	collidersToRemove.clear();
+
+		colliders.erase(std::remove(colliders.begin(),
+			colliders.end(), collidersToRemove.top()), colliders.end());
+
+		//Delete ptr
+		REMOVE_PTR(collidersToRemove.top());
+
+		collidersToRemove.pop();
+	}
 }
 
 GameWorld& GameWorld::GetInstanceRef()
@@ -288,6 +298,27 @@ GLFWwindow & GameWorld::GetWindow()
 {
 	//the window reference = the value of the window pointer, stored on the singleton instance 
 	return *instancePtr->windowPtr;
+}
+
+void GameWorld::DestroyGameObject(GameObject* goRef)
+{
+	gameObjectsToRemove.push(goRef);
+
+	Collider* myColPtr = nullptr;
+
+	for (Collider* colPtr : colliders)
+	{
+		if (colPtr->GetGameObject() == goRef)
+		{
+			myColPtr = colPtr;
+			break;
+		}
+	}
+
+	if (myColPtr != nullptr)
+	{
+		collidersToRemove.push(myColPtr);
+	}
 }
 
 std::vector<Collider*>& GameWorld::GetColliders()

@@ -30,6 +30,7 @@
 #define PLAYER_BASE_HEALTH  6
 #define PLAYER_MOVEMENT_DAMPENING -2
 #define PLAYER_INVINCIBILITY_TIME_SECONDS 2
+#define PLAYER_SHOOT_COOLDOWN 0.5
 
 //Objects in general
 #define DEFAULT_OBJECT_SIZE 15
@@ -44,7 +45,10 @@
 #define ASTEROID_HEALTH_MODIFER 5 //lower is higher
 #define ASTEROID_ROTATION_SPEED 200
 
-
+//Projectiles
+#define PROJECTILE_SPEED 5
+#define PROJECTILE_SIZE 2
+#define PROJECTILE_BOUNCE_THRESHOLD 3
 
 //Macros that will change/disable functionality depending on Configuration (debug / release)
 #pragma region DEBUG/RELEASE Macros

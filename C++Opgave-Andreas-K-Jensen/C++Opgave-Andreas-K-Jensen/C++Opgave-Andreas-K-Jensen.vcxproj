@@ -135,6 +135,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="KillAble.h" />
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Spawner.h" />
     <ClInclude Include="Time.h" />

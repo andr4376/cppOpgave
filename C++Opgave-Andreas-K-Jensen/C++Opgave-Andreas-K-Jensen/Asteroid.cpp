@@ -59,20 +59,7 @@ void Asteroid::Die()
 
 	SplitIntoTwo();
 
-	GameWorld::GetInstanceRef().gameObjectsToRemove.push_back(this);
-
-	Collider* myColPtr = nullptr;
-
-	for (Collider* colPtr : GameWorld::GetInstanceRef().colliders)
-	{
-		if (colPtr->GetGameObject() == this)
-		{
-			myColPtr = colPtr;
-			break;
-		}
-	}
-
-	GameWorld::GetInstanceRef().collidersToRemove.push_back(myColPtr);
+	GameWorld::GetInstanceRef().DestroyGameObject(this);
 
 	DEBUG_LOG("Asteroid is dead");
 
